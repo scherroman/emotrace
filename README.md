@@ -1,6 +1,18 @@
 # emotrace
 A Java Spring Web App for Collecting Emotion Analytics for Online Video Content
 
+## Setup
+
+**1 - Import the repo folder into IntelliJ
+
+## Testing Locally
+
+**1 - Select and run "GAE Local Dev" configuration
+
+## Deploying Remotely
+
+**1 - Select and run "GAE Remote Deploy" configuration
+
 ## Dev Guide
 
 **1 - Pull/Sync master for latest code**
