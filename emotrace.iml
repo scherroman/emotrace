@@ -33,5 +33,6 @@
     <orderEntry type="library" name="com.google.appengine:appengine-api-1.0-sdk:Release" level="project" />
     <orderEntry type="library" name="com.google.appengine:appengine-endpoints:Release" level="project" />
     <orderEntry type="library" name="com.googlecode.objectify:objectify:Release" level="project" />
+    <orderEntry type="library" name="thymeleaf-layout-dialect-2.2.1" level="project" />
   </component>
 </module>
