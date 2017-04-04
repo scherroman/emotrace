@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="thymeleaf-layout-dialect-2.2.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Desktop/Thymeleaf Layout Dialect/thymeleaf-layout-dialect-2.2.1.jar!/" />
-      <root url="jar://$USER_HOME$/Desktop/Thymeleaf Layout Dialect/Libraries/groovy-2.4.6.jar!/" />
-      <root url="jar://$USER_HOME$/Desktop/Thymeleaf Layout Dialect/Libraries/thymeleaf-expression-processor-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/thymeleaf-layout-dialect-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/thymeleaf-expression-processor-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/groovy-2.4.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
