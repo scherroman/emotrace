@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/channels")
 public class ChannelsController {
 
+    //SERVES A PAGE DISPLAYING ALL CHANNELS ON SITE
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String channels(){
         return "channels";

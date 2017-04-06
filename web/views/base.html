@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/x-icon" th:href="@{/assets/images/favicon.png}">
 
         <!-- CSS -->
 
@@ -12,11 +13,11 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
             <!-- Bootstrap Material Design -->
-            <link rel="stylesheet" th:href="@{static/bootstrap-material-design/bootstrap-material-design.css}">
-            <link rel="stylesheet" th:href="@{static/bootstrap-material-design/ripples.min.css}">
+            <link rel="stylesheet" th:href="@{/static/bootstrap-material-design/bootstrap-material-design.css}">
+            <link rel="stylesheet" th:href="@{/static/bootstrap-material-design/ripples.min.css}">
 
             <!-- Emotrace -->
-            <link rel="stylesheet" th:href="@{static/css/main.css}">
+            <link rel="stylesheet" th:href="@{/static/css/main.css}">
 
         <!-- Scripts -->
 
@@ -38,7 +39,6 @@
 
         <title>Emotrace</title>
     </head>
-<<<<<<< HEAD
     <body>
         <div class="navbar navbar-primary">
           <div class="container-fluid">
@@ -48,13 +48,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <b><a class="navbar-brand" href="javascript:void(0)">Emotrace</a></b>
+              <b><a class="navbar-brand" th:href="@{/}">Emotrace</a></b>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="javascript:void(0)">Videos</a></li>
-                <li><a href="javascript:void(0)">Channels</a></li>
-                <li><a href="javascript:void(0)">Users</a></li>
+                <li layout:fragment="videos-tab"><a th:href="@{/}">Videos</a></li>
+                <li layout:fragment="channels-tab"><a th:href="@{/channels}">Channels</a></li>
+                <li layout:fragment="users-tab"><a th:href="@{/users}">Users</a></li>
               </ul>
               <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -67,10 +67,6 @@
             </div>
           </div>
         </div>
-=======
-
-    <body>
-    Base
->>>>>>> master
+        <div class="container" layout:fragment="content"></div>
     </body>
 </html>
