@@ -2,9 +2,8 @@
     <head>
     </head>
     <body>
-        <li class="active" layout:fragment="videos-tab"><a th:href="@{/}">Videos</a></li>
         <div layout:fragment="content">
-            <h1>Videos</h1>
+            <h1 th:text="'Channel ' + ${channel_id} + ''"></h1>
         </div>
     </body>
 </html>
