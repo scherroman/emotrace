@@ -1,10 +1,70 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <!-- CSS -->
+
+            <!-- Material Design fonts -->
+            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+            <!-- Bootstrap Material Design -->
+            <link rel="stylesheet" th:href="@{static/bootstrap-material-design/bootstrap-material-design.css}">
+            <link rel="stylesheet" th:href="@{static/bootstrap-material-design/ripples.min.css}">
+
+            <!-- Emotrace -->
+            <link rel="stylesheet" th:href="@{static/css/main.css}">
+
+        <!-- Scripts -->
+
+            <!-- Jquery-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+            <!-- Bootstrap -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+            <!-- Bootstrap Material Design -->
+            <script th:src="@{static/bootstrap-material-design/arrive.min.js}"></script>
+            <script th:src="@{static/bootstrap-material-design/material.min.js}"></script>
+            <script th:src="@{static/bootstrap-material-design/ripples.min.js}"></script>
+
+            <!-- Initialize Bootstrap Material Design -->
+            <script>
+                $(document).ready(function() { $.material.init(); })
+            </script>
 
         <title>Emotrace</title>
     </head>
+    <body>
+        <div class="navbar navbar-primary">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <b><a class="navbar-brand" href="javascript:void(0)">Emotrace</a></b>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="javascript:void(0)">Videos</a></li>
+                <li><a href="javascript:void(0)">Channels</a></li>
+                <li><a href="javascript:void(0)">Users</a></li>
+              </ul>
+              <form class="navbar-form navbar-left">
+                <div class="form-group">
+                  <input type="text" class="form-control col-md-8" placeholder="Search">
+                </div>
+              </form>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0)">Sign Up</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </body>
 </html>
