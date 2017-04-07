@@ -1,3 +1,41 @@
+
+/* Colors */
+
 .primary-color { background-color: #8BC34A; }
 .dark-primary-color    { background-color: #689F38; }
 .light-primary-color   { sbackground-color: #DCEDC8; }
+
+/* Cards */
+
+.card-link { text-decoration: none !important; }
+.card-link:hover .card-title {  color: #8BC34A; }
+.card {
+    position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    padding:0;
+    word-wrap: break-word;
+}
+
+.text-card {}
+
+.video-card {
+    width: 196px;
+    height: 198px;
+}
+.video-card-title {
+    overflow: hidden;
+    width: 160px;
+    height: 30px;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.card-bottom-left-icon {
+    position: absolute;
+    right: 9px;
+    bottom: 9px;
+}
+
+
