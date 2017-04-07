@@ -9,4 +9,5 @@
 
     <!-- Let controllers handle request mappings -->
     <context:component-scan base-package="emotrace.controllers" />
+
 </beans>
