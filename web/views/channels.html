@@ -4,7 +4,21 @@
     <body>
         <li class="active" layout:fragment="channels-tab"><a th:href="@{/channels}">Channels</a></li>
         <div layout:fragment="content">
-            <h1>Channels</h1>
+            <div class="row">
+                <div class="col-ms-6 col-sm-4 col-md-3" th:each="video : ${ {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16} }">
+                    <a class="card-link" href="https://www.youtube.com/watch?v=h3kqBX1j7f8">
+                        <div class="panel thumbnail card text-card">
+                            <div class="caption">
+                                <h4 class="card-title text-card-title">Channel Name</h4>
+                                <p class="text-card-description">Description</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row text-center">
+                <a href="javascript:void(0)" class="btn btn-raised">Load More</a>
+            </div>
         </div>
     </body>
 </html>
