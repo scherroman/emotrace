@@ -43,7 +43,7 @@
 
     <servlet-mapping>
         <servlet-name>ChannelController</servlet-name>
-        <url-pattern>/channel</url-pattern>
+        <url-pattern>/channel/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -69,7 +69,7 @@
 
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
-        <url-pattern>/user</url-pattern>
+        <url-pattern>/user/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -95,7 +95,7 @@
 
     <servlet-mapping>
         <servlet-name>VideoController</servlet-name>
-        <url-pattern>/video</url-pattern>
+        <url-pattern>/video/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
