@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<link rel="icon" type="image/x-icon" th:href="@{/assets/images/favicon.png}">-->
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/static/css/login.css}">
+
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" th:href="@{/static/bootstrap-material-design/bootstrap-material-design.css}">
+    <link rel="stylesheet" th:href="@{/static/bootstrap-material-design/ripples.min.css}">
+
+    <!-- Emotrace -->
+    <link rel="stylesheet" th:href="@{/static/css/main.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap-480-767-grid.css}">
+
+    <!-- Scripts -->
+
+    <!-- Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Affectiva -->
+    <script src="https://download.affectiva.com/js/3.2/affdex.js"/>
+
+    <!-- Bootstrap Material Design -->
+    <script th:src="@{static/bootstrap-material-design/arrive.min.js}"></script>
+    <script th:src="@{static/bootstrap-material-design/material.min.js}"></script>
+    <script th:src="@{static/bootstrap-material-design/ripples.min.js}"></script>
+
+    <!-- Initialize Bootstrap Material Design -->
+    <script>
+        $(document).ready(function() { $.material.init(); })
+    </script>
+
+    <meta charset="UTF-8">
+
+    <meta name="google-signin-client_id" content="668692268404-b5mib7j4o7ooalk7mtdhsl340i1k3e43.apps.googleusercontent.com">
+    <title>Login</title>
+</head>
+<body>
+
+<div id="logo" class="center">
+    <img th:src="@{/assets/images/favicon.png}" id="login_image">
+    <h3>Emotrace<br/></h3>
+</div>
+
+
+
+<div id="my-signin2" class="g-signin2"></div>
+<script>
+    function onSuccess(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('Logged in as: ' + profile.getName() + ', no constructing POST form');
+        $.ajax({
+            type: "POST",
+            url: "/login/loginPost",
+            // The key needs to match your method's input parameter (case-sensitive).
+//            data: JSON.stringify({"full_name": profile.getName(),
+//                                  "email": profile.getEmail()}),
+            data: profile.getName() + ' ' + profile.getEmail(),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){alert(data);},
+            failure: function(errMsg) {
+                alert(errMsg);
+            }
+        });
+        window.location.href = "/";
+    }
+    function onFailure(error) {
+        console.log(error);
+    }
+    function renderButton() {
+        gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+</script>
+
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+<a href="#" onclick="signOut();" id="center">Sign out</a>
+<script>
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.disconnect();
+//        auth2.signOut().then(function () {
+//            console.log('User signed out.');
+//        });
+    }
+</script>
+
+</body>
+</html>

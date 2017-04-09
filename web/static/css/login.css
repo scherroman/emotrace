@@ -1,0 +1,17 @@
+.center{
+    line-height: 200px;
+    height: 200px;
+    text-align: center;
+}
+.g-signin2{
+    width: 100%;
+}
+.g-signin2 > div{
+    margin: 0 auto;
+}
+
+#login_image{
+    height: 50%;
+    width: 15%;
+    margin: 0 auto;
+}
