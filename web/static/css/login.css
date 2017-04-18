@@ -1,0 +1,19 @@
+.sign_out{
+    text-align: center;
+}
+
+#sign_out{
+    color: #ffffff;
+}
+
+.g-signin2{
+    color: #8BC34A;
+    width: 100%;
+    font-size: 6px;
+}
+
+#login_image{
+    height: 50%;
+    width: 15%;
+    margin: 0 auto;
+}
