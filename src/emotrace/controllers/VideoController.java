@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by nashahzad on 4/3/2017.
  */
 @Controller
-@RequestMapping("/video")
 public class VideoController {
 
     //SERVES A PAGE DISPLAYING A SPECIFIC VIDEO ON SITE, WITH SPECIFIED VIDEO ID
