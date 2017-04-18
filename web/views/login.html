@@ -44,6 +44,8 @@
     <meta charset="UTF-8">
 
     <meta name="google-signin-client_id" content="668692268404-b5mib7j4o7ooalk7mtdhsl340i1k3e43.apps.googleusercontent.com">
+    <script th:src="@{static/js/login.js}"></script>
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <title>Login</title>
 </head>
 <body>
@@ -56,54 +58,7 @@
 
 
 <div id="my-signin2" class="g-signin2"></div>
-<script>
-    function onSuccess(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('Logged in as: ' + profile.getName() + ', no constructing POST form');
-        $.ajax({
-            type: "POST",
-            url: "/login/loginPost",
-            // The key needs to match your method's input parameter (case-sensitive).
-            data: JSON.stringify({"full_name": profile.getName(),
-                                  "email": profile.getEmail()}),
-//            data: profile.getName() + ' ' + profile.getEmail(),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function(data){alert(data);},
-            failure: function(errMsg) {
-                alert(errMsg);
-            }
-        });
-        window.location.href = "/";
-    }
-    function onFailure(error) {
-        console.log(error);
-    }
-    function renderButton() {
-        gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-        });
-    }
-</script>
-
-<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
-<a href="#" onclick="signOut();" id="center">Sign out</a>
-<script>
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.disconnect();
-//        auth2.signOut().then(function () {
-//            console.log('User signed out.');
-//        });
-    }
-</script>
+<a href="#" onclick="signOut();" class="sign_out" id="center">Sign out</a>
 
 </body>
 </html>

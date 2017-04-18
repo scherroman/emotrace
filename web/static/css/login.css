@@ -1,13 +1,15 @@
-.center{
-    line-height: 200px;
-    height: 200px;
+.sign_out{
     text-align: center;
 }
-.g-signin2{
-    width: 100%;
+
+#sign_out{
+    color: #ffffff;
 }
-.g-signin2 > div{
-    margin: 0 auto;
+
+.g-signin2{
+    color: #8BC34A;
+    width: 100%;
+    font-size: 6px;
 }
 
 #login_image{

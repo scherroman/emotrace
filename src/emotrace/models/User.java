@@ -24,4 +24,30 @@ public class User {
     this.googleAccount = googleAccount;
     this.name = name;
   }
+
+  public User(){}
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getGoogleAccount() {
+    return googleAccount;
+  }
+
+  public void setGoogleAccount(String googleAccount) {
+    this.googleAccount = googleAccount;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
 }
