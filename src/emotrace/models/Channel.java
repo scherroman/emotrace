@@ -17,9 +17,9 @@ public class Channel {
   @Parent
   User owner;
 
-  @Id public Long id;
-  public String name;
-  public String description;
+  @Id Long id;
+  String name;
+  String description;
 
   /**
    * Simple Channel constructor

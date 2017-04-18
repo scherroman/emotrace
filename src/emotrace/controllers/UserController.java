@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by nashahzad on 4/4/17.
  */
 @Controller
-@RequestMapping("/user")
 public class UserController {
 
     //SERVES A PAGE DISPLAYING ALL CHANNELS ASSOCIATED WITH A SPECIFIC USER
-    @RequestMapping(value = "/{user_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "{user_id}", method = RequestMethod.GET)
     public String user(@PathVariable("user_id") String user_id, Model model){
         model.addAttribute("user_id", user_id);
         return "user";
