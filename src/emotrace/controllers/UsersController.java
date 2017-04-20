@@ -14,7 +14,8 @@ public class UsersController {
 
     //SERVES A PAGE DISPLAYING ALL DIFFERENT USERS ON SITE
     @RequestMapping(value = "users", method = RequestMethod.GET)
-    public String users(){
+    public String users(ModelMap modelMap){
+        LoginController.addUsernameToTemplate(modelMap);
         return "users";
     }
 }
