@@ -33,6 +33,7 @@ function sign_out(){
         success: function(data){
             debugger;
             console.log(data.url);
+
             window.location.href = data.url;
         },
         failure: function(errMsg) {
@@ -41,8 +42,25 @@ function sign_out(){
     });
 }
 
-function redirect_mychannels(){
+function mychannel(){
+    debugger;
+    $.ajax({
+        type: "POST",
+        url: "/user/mychannel",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(""),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(data){
+            debugger;
+            console.log(data.user_id);
 
+            window.location.href = "/user/" + data.user_id;
+        },
+        failure: function(errMsg) {
+            alert(errMsg);
+        }
+    });
 }
 
 function getCurrentUser() {

@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0612502d-1ebf-4723-9937-59bc7514b1ca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/static/js/channels.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/static/js/components/load_more.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/views/fragment_collections/channel_cards.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/web/views/fragments/load_more_button.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/emotrace/controllers/ChannelsController.java" afterPath="$PROJECT_DIR$/src/emotrace/controllers/ChannelsController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/emotrace/controllers/IndexController.java" afterPath="$PROJECT_DIR$/src/emotrace/controllers/IndexController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/emotrace/controllers/TestController.java" afterPath="$PROJECT_DIR$/src/emotrace/controllers/TestController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/emotrace/controllers/UserController.java" afterPath="$PROJECT_DIR$/src/emotrace/controllers/UserController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/emotrace/controllers/UsersController.java" afterPath="$PROJECT_DIR$/src/emotrace/controllers/UsersController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/static/js/user.js" afterPath="$PROJECT_DIR$/web/static/js/user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/views/channels.html" afterPath="$PROJECT_DIR$/web/views/channels.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/views/user.html" afterPath="$PROJECT_DIR$/web/views/user.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/static/js/login.js" afterPath="$PROJECT_DIR$/web/static/js/login.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/views/base.html" afterPath="$PROJECT_DIR$/web/views/base.html" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +33,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/views/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="84" column="86" lean-forward="false" selection-start-line="84" selection-start-column="86" selection-end-line="84" selection-end-column="86" />
+            <state relative-caret-position="247">
+              <caret line="89" column="79" lean-forward="false" selection-start-line="89" selection-start-column="79" selection-end-line="89" selection-end-column="79" />
               <folding>
                 <element signature="n#style#0;n#button#0;n#li#0;n#div#0;n#ul#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#button#0;n#div#0;n#li#0;n#div#0;n#ul#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -74,11 +66,21 @@
       <file leaf-file-name="login.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/static/js/login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="29" column="93" lean-forward="false" selection-start-line="29" selection-start-column="93" selection-end-line="29" selection-end-column="93" />
+            <state relative-caret-position="324">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc;n#sign_in#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChannelsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/ChannelsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,8 +98,8 @@
       <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="27" column="49" lean-forward="true" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+            <state relative-caret-position="332">
+              <caret line="31" column="58" lean-forward="false" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -212,14 +214,14 @@
         <option value="$PROJECT_DIR$/web/views/user.html" />
         <option value="$PROJECT_DIR$/web/views/login.html" />
         <option value="$PROJECT_DIR$/web/static/css/login.css" />
-        <option value="$PROJECT_DIR$/web/static/js/login.js" />
         <option value="$PROJECT_DIR$/src/emotrace/controllers/IndexController.java" />
         <option value="$PROJECT_DIR$/src/emotrace/controllers/ChannelController.java" />
-        <option value="$PROJECT_DIR$/src/emotrace/controllers/ChannelsController.java" />
-        <option value="$PROJECT_DIR$/src/emotrace/controllers/UsersController.java" />
         <option value="$PROJECT_DIR$/src/emotrace/controllers/VideoController.java" />
         <option value="$PROJECT_DIR$/src/emotrace/controllers/LoginController.java" />
         <option value="$PROJECT_DIR$/web/views/base.html" />
+        <option value="$PROJECT_DIR$/web/static/js/login.js" />
+        <option value="$PROJECT_DIR$/src/emotrace/controllers/ChannelsController.java" />
+        <option value="$PROJECT_DIR$/src/emotrace/controllers/UsersController.java" />
         <option value="$PROJECT_DIR$/src/emotrace/controllers/UserController.java" />
       </list>
     </option>
@@ -1011,7 +1013,7 @@
       <workItem from="1492463556383" duration="239000" />
       <workItem from="1492463840712" duration="9316000" />
       <workItem from="1492653397709" duration="3340000" />
-      <workItem from="1492656934550" duration="7471000" />
+      <workItem from="1492656934550" duration="10304000" />
     </task>
     <task id="LOCAL-00001" summary="servlet files for each route">
       <created>1491544346677</created>
@@ -1066,7 +1068,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124571000" />
+    <option name="totallyTimeSpent" value="127404000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1090" height="1054" extended-state="4" />
@@ -1459,16 +1461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/static/js/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="29" column="93" lean-forward="false" selection-start-line="29" selection-start-column="93" selection-end-line="29" selection-end-column="93" />
-          <folding>
-            <element signature="n#!!doc;n#sign_in#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/views/channels.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1485,14 +1477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/ChannelsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="57" lean-forward="false" selection-start-line="23" selection-start-column="57" selection-end-line="23" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/TestController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1505,14 +1489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="20" column="56" lean-forward="false" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/UsersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="18" column="56" lean-forward="false" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -1535,12 +1511,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/views/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="84" column="86" lean-forward="false" selection-start-line="84" selection-start-column="86" selection-end-line="84" selection-end-column="86" />
+        <state relative-caret-position="247">
+          <caret line="89" column="79" lean-forward="false" selection-start-line="89" selection-start-column="79" selection-end-line="89" selection-end-column="79" />
           <folding>
             <element signature="n#style#0;n#button#0;n#li#0;n#div#0;n#ul#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#li#0;n#div#0;n#ul#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/static/js/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc;n#sign_in#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/ChannelsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="22" column="33" lean-forward="true" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/UsersController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="17" column="54" lean-forward="false" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1554,8 +1556,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/emotrace/controllers/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="27" column="49" lean-forward="true" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+        <state relative-caret-position="332">
+          <caret line="31" column="58" lean-forward="false" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

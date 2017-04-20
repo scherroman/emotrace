@@ -19,7 +19,7 @@ public class ChannelsController {
     public static final int NUM_CHANNELS_PER_PAGE = 16;
 
     //SERVES A PAGE DISPLAYING ALL CHANNELS ON SITE
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "channels", method = RequestMethod.GET)
     public String channels(Model model, ModelMap modelMap){
         List<Channel> channels = Channel.scroll_channels(NUM_CHANNELS_PER_PAGE, 0);
 
