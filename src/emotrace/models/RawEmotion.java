@@ -14,26 +14,40 @@ import java.util.List;
 
 @Entity
 public class RawEmotion {
-  @Parent
-  Video video;
-  @Id public Long id;
+  Key<Video> video;
 
+  @Id public Long id;
   @Index public double timestamp;
-  public String appearance;
-  public String emotions;
-  public String expressions;
+  public int joy;
+  public int sadness;
+  public int disgust;
+  public int contempt;
+  public int anger;
+  public int fear;
+  public int surprise;
+  public int valence;
+  public int engagement;
   public String emoji;
+
+  public RawEmotion () {}
 
   /**
    * Simple RawEmotion constructor
    **/
-  public RawEmotion(Video video, Long id, String googleAccount, String name) {
+  public RawEmotion(Key<Video> video, Long id, double timestamp, int joy, int sadness, int disgust, int contempt,
+                    int anger, int fear, int surprise, int valence, int engagement, String emoji) {
   	this.video = video;
     this.id = id;
     this.timestamp = timestamp;
-    this.appearance = appearance;
-    this.emotions = emotions;
-    this.expressions = expressions;
+    this.joy = joy;
+    this.sadness = sadness;
+    this.disgust = disgust;
+    this.contempt = contempt;
+    this.anger = anger;
+    this.fear = fear;
+    this.surprise = surprise;
+    this.valence = valence;
+    this.engagement = engagement;
     this.emoji = emoji;
   }
 }
