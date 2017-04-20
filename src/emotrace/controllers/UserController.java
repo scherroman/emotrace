@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
 @RequestMapping("/user/*")
 public class UserController {
 
-    public static final int NUM_CHANNELS_PER_PAGE = 32;
+    public static final int NUM_CHANNELS_PER_PAGE = 16;
 
     //SERVES A PAGE DISPLAYING ALL CHANNELS ASSOCIATED WITH A SPECIFIC USER
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -36,5 +37,16 @@ public class UserController {
         LoginController.addUsernameToTemplate(modelMap);
 
         return "user";
+    }
+
+    @RequestMapping(value = "{user_id}/channels/scroll", method = RequestMethod.GET)
+    public String scroll_channels(@PathVariable("user_id") String user_id,
+                                  @RequestParam("offset") int offset, Model model) {
+        offset = offset * NUM_CHANNELS_PER_PAGE;
+        List<Channel> channels = Channel.get_channels_by_owner(user_id, NUM_CHANNELS_PER_PAGE, offset);
+
+        model.addAttribute("channels", channels);
+
+        return "fragment_collections/channel_cards";
     }
 }

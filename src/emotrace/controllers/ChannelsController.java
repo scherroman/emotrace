@@ -14,10 +14,9 @@ import java.util.List;
  * Created by romanscher on 4/1/17.
  */
 @Controller
-@RequestMapping("/channels")
 public class ChannelsController {
 
-    public static final int NUM_CHANNELS_PER_PAGE = 32;
+    public static final int NUM_CHANNELS_PER_PAGE = 16;
 
     //SERVES A PAGE DISPLAYING ALL CHANNELS ON SITE
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -31,9 +30,13 @@ public class ChannelsController {
         return "channels";
     }
 
-//    @RequestMapping(value = "/scroll_channels", method = RequestMethod.GET)
-//    public String scroll_channels(@RequestParam(value="offset", defaultValue="0") int offset) {
-//        channels = Channel.scroll_channels(NUM_CHANNELS_PER_PAGE, offset);
-//
-//    }
+    @RequestMapping(value = "/scroll", method = RequestMethod.GET)
+    public String scroll_channels(@RequestParam("offset") int offset, Model model) {
+        offset = offset * NUM_CHANNELS_PER_PAGE;
+        List<Channel> channels = Channel.scroll_channels(NUM_CHANNELS_PER_PAGE, offset);
+
+        model.addAttribute("channels", channels);
+
+        return "fragment_collections/channel_cards";
+    }
 }

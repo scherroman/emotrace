@@ -1,0 +1,5 @@
+<th:block layout:fragment="channel_cards(channels)">
+    <th:block th:each="channel : ${channels}">
+        <div layout:replace="fragments/channel_card :: channel_card(channel=${channel})"></div>
+    </th:block>
+</th:block>

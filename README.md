@@ -23,11 +23,11 @@ A Java Spring Web App for Collecting Emotion Analytics for Online Video Content
 
 5. **Open `http://localhost:8080` in your browser**
 
-#### Development Console
+### Development Console
 
 `http://localhost:8000`
 
-#### gcloud commands
+### gcloud commands
 
 **Set current project**
 
