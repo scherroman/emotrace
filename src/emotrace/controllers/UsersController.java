@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by romanscher on 4/6/17.
  */
 @Controller
-@RequestMapping("/users")
 public class UsersController {
 
     //SERVES A PAGE DISPLAYING ALL DIFFERENT USERS ON SITE
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "users", method = RequestMethod.GET)
     public String users(){
         return "users";
     }
