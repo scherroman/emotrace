@@ -55,8 +55,13 @@
     <h3>Emotrace<br/></h3>
 </div>
 
+<div th:switch="${name}">
+    <p th:case="none"></p>
+    <p th:case="*" th:text="${name}"></p>
+</div>
+<!--<p id="username" th:text="${name}"></p>-->
 
-
+<button onclick="sign_in()">Sign in Foo</button>
 <div id="my-signin2" class="g-signin2"></div>
 <a href="#" onclick="signOut();" class="sign_out" id="center">Sign out</a>
 

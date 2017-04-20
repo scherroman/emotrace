@@ -1,24 +1,15 @@
 <html layout:decorate="~{base}">
     <head>
+        <script th:src="@{~/static/js/channels.js}"></script>
     </head>
     <body>
-        <li class="active" layout:fragment="channels-tab"><a th:href="@{/channels}">Channels</a></li>
+        <li class="active" layout:fragment="channels-tab"><a th:href="@{~/channels}">Channels</a></li>
         <div layout:fragment="content">
-            <div class="row">
-                <div class="col-ms-6 col-sm-4 col-md-3" th:each="video : ${ {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16} }">
-                    <a class="card-link" href="https://www.youtube.com/watch?v=h3kqBX1j7f8">
-                        <div class="panel thumbnail card text-card">
-                            <div class="caption">
-                                <h4 class="card-title text-card-title">Channel Name</h4>
-                                <p class="text-card-description">Description</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+            <div id="channels" class="row load_more_content">
+                <th:block layout:replace="fragment_collections/channel_cards :: channel_cards(channels=${channels})"></th:block>
             </div>
-            <div class="row text-center">
-                <a href="javascript:void(0)" class="btn btn-raised">Load More</a>
-            </div>
+
+            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/channels/scroll})"></th:block>
         </div>
     </body>
 </html>

@@ -17,3 +17,10 @@
     width: 15%;
     margin: 0 auto;
 }
+
+.dropdown-menu {
+    left: 0%;
+    right: auto;
+    text-align: center;
+    transform: translate(-15%, 0);
+}

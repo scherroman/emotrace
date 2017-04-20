@@ -2,7 +2,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="google-signin-client_id" content="668692268404-b5mib7j4o7ooalk7mtdhsl340i1k3e43.apps.googleusercontent.com">
-        <link rel="icon" type="image/x-icon" th:href="@{/assets/images/favicon.png}">
+        <link rel="icon" type="image/x-icon" th:href="@{~/assets/images/favicon.png}">
 
         <!-- CSS -->
 
@@ -14,13 +14,13 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
             <!-- Bootstrap Material Design -->
-            <link rel="stylesheet" th:href="@{/static/bootstrap-material-design/bootstrap-material-design.css}">
-            <link rel="stylesheet" th:href="@{/static/bootstrap-material-design/ripples.min.css}">
+            <link rel="stylesheet" th:href="@{~/static/bootstrap-material-design/bootstrap-material-design.css}">
+            <link rel="stylesheet" th:href="@{~/static/bootstrap-material-design/ripples.min.css}">
 
             <!-- Emotrace -->
-            <link rel="stylesheet" th:href="@{/static/css/main.css}">
-            <link rel="stylesheet" th:href="@{/static/css/login.css}">
-            <link rel="stylesheet" th:href="@{/static/css/bootstrap-480-767-grid.css}">
+            <link rel="stylesheet" th:href="@{~/static/css/main.css}">
+            <link rel="stylesheet" th:href="@{~/static/css/login.css}">
+            <link rel="stylesheet" th:href="@{~/static/css/bootstrap-480-767-grid.css}">
 
         <!-- Scripts -->
 
@@ -34,9 +34,9 @@
             <script src="https://download.affectiva.com/js/3.2/affdex.js"/>
 
             <!-- Bootstrap Material Design -->
-            <script th:src="@{static/bootstrap-material-design/arrive.min.js}"></script>
-            <script th:src="@{static/bootstrap-material-design/material.min.js}"></script>
-            <script th:src="@{static/bootstrap-material-design/ripples.min.js}"></script>
+            <script th:src="@{~/static/bootstrap-material-design/arrive.min.js}"></script>
+            <script th:src="@{~/static/bootstrap-material-design/material.min.js}"></script>
+            <script th:src="@{~/static/bootstrap-material-design/ripples.min.js}"></script>
 
             <!-- Initialize Bootstrap Material Design -->
             <script>
@@ -44,7 +44,7 @@
             </script>
 
             <!-- Login JS -->
-            <script th:src="@{static/js/login.js}"></script>
+            <script th:src="@{~/static/js/login.js}"></script>
             <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
         <title>Emotrace</title>
@@ -58,13 +58,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <b><a class="navbar-brand" th:href="@{/}">Emotrace</a></b>
+              <b><a class="navbar-brand" th:href="@{~/}">Emotrace</a></b>
             </div>
             <div class="navbar-collapse collapse navbar-responsive-collapse">
               <ul class="nav navbar-nav">
-                <li layout:fragment="videos-tab"><a th:href="@{/}">Videos</a></li>
-                <li layout:fragment="channels-tab"><a th:href="@{/channels}">Channels</a></li>
-                <li layout:fragment="users-tab"><a th:href="@{/users}">Users</a></li>
+                <li layout:fragment="videos-tab"><a th:href="@{~/}">Videos</a></li>
+                <li layout:fragment="channels-tab"><a th:href="@{~/channels}">Channels</a></li>
+                <li layout:fragment="users-tab"><a th:href="@{~/users}">Users</a></li>
               </ul>
               <form class="navbar-form navbar-left">
                 <div class="form-group">
@@ -72,12 +72,36 @@
                 </div>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                  <li layout:fragment=""><div id="my-signin2" class="g-signin2" data-color="#8BC34A"></div></li>
-                  <li layout:fragment=""><a href="#" class="sign_out" onclick="signOut();" id="center">Sign out</a></li>
+                  <div th:switch="${name}">
+                      <li layout:fragment="login-tab">
+                          <button onclick="sign_in()" class="btn btn-light-green"
+                                  style="color:white;" th:case="none">Sign In</button>
+                          <!--<p th:case="none"></p>-->
+                          <!--<p th:case="*" th:text="${name}"></p>-->
+                          <!--Dropdown success-->
+                          <div class="dropdown" th:case="*">
+                              <!--Trigger-->
+                              <button class="btn btn-success dropdown-toggle" type="button"
+                                      id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true"
+                                      aria-expanded="false" style="color:white; font-size:12px;"
+                                      th:inline="text">Welcome [[${name}]]! </button>
+                              <!--Menu-->
+                              <div class="dropdown-menu dropdown-success" >
+                                  <a class="dropdown-item" href="/user/">MyChannels</a>
+                                  <br/>
+                                  <a class="dropdown-item" onclick="sign_out()" >Sign Out</a>
+                              </div>
+                          </div>
+                          <!--/Dropdown success-->
+                      </li>
+                  </div>
+                  <!--<li layout:fragment=""><div id="my-signin2" class="g-signin2" data-color="#8BC34A"></div></li>-->
+                  <!--<li layout:fragment=""><a href="#" class="sign_out" onclick="signOut();" id="center">Sign out</a></li>-->
               </ul>
             </div>
           </div>
         </div>
+
         <div class="container" layout:fragment="content"></div>
     </body>
 </html>

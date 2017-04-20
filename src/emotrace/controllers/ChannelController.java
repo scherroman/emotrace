@@ -1,7 +1,11 @@
 package emotrace.controllers;
 
+import com.googlecode.objectify.Key;
+import emotrace.models.Channel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,10 +16,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ChannelController {
 
-    //SERVES A PAGE DISPLAYING ALL CHANNELS ON SITE
+    // Displays a channel
     @RequestMapping(value = "/{channel_id}", method = RequestMethod.GET)
-    public String channel(@PathVariable("channel_id") String channel_id, Model model){
-        model.addAttribute("channel_id", channel_id);
+    public String channel(@PathVariable("channel_id") Long channel_id, Model model, ModelMap modelMap){
+        Channel channel = Channel.get_channel_by_id(channel_id);
+
+        model.addAttribute("channel", channel);
+
+        LoginController.addUsernameToTemplate(modelMap);
+
         return "channel";
+    }
+
+    @RequestMapping(value = "/forms/create", method = RequestMethod.POST)
+    public String create_channel(@ModelAttribute Channel channel, Model model) {
+        System.out.println("channel: " + channel);
+        System.out.println("channel owner: " + channel.owner);
+        channel.create();
+
+        model.addAttribute("channel", channel);
+
+        return "fragments/channel_card";
+    }
+
+    @RequestMapping(value = "/forms/delete", method = RequestMethod.POST)
+    public String delete_channel() {
+        return "";
+    }
+
+    @RequestMapping(value = "/forms/rename", method = RequestMethod.POST)
+    public String rename_channel() {
+        return "";
     }
 }

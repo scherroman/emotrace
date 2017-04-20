@@ -2,6 +2,7 @@ package emotrace.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,8 +16,9 @@ public class VideoController {
 
     //SERVES A PAGE DISPLAYING A SPECIFIC VIDEO ON SITE, WITH SPECIFIED VIDEO ID
     @RequestMapping(value = "/{video_id}", method = RequestMethod.GET)
-    public String video(@PathVariable("video_id") String video_id, Model model){
+    public String video(@PathVariable("video_id") String video_id, Model model, ModelMap modelMap){
         model.addAttribute("video_id", video_id);
+        LoginController.addUsernameToTemplate(modelMap);
         return "video";
     }
 }
