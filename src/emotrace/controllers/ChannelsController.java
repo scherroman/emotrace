@@ -3,6 +3,7 @@ package emotrace.controllers;
 import emotrace.models.Channel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +21,12 @@ public class ChannelsController {
 
     //SERVES A PAGE DISPLAYING ALL CHANNELS ON SITE
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String channels(Model model){
+    public String channels(Model model, ModelMap modelMap){
         List<Channel> channels = Channel.scroll_channels(NUM_CHANNELS_PER_PAGE, 0);
 
         model.addAttribute("channels", channels);
+
+        LoginController.addUsernameToTemplate(modelMap);
 
         return "channels";
     }

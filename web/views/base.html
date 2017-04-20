@@ -72,8 +72,31 @@
                 </div>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                  <li layout:fragment=""><div id="my-signin2" class="g-signin2" data-color="#8BC34A"></div></li>
-                  <li layout:fragment=""><a href="#" class="sign_out" onclick="signOut();" id="center">Sign out</a></li>
+                  <div th:switch="${name}">
+                      <li layout:fragment="login-tab">
+                          <button onclick="sign_in()" class="btn btn-light-green"
+                                  style="color:white;" th:case="none">Sign In</button>
+                          <!--<p th:case="none"></p>-->
+                          <!--<p th:case="*" th:text="${name}"></p>-->
+                          <!--Dropdown success-->
+                          <div class="dropdown" th:case="*">
+                              <!--Trigger-->
+                              <button class="btn btn-success dropdown-toggle" type="button"
+                                      id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true"
+                                      aria-expanded="false" style="color:white; font-size:12px;"
+                                      th:inline="text">Welcome [[${name}]]! </button>
+                              <!--Menu-->
+                              <div class="dropdown-menu dropdown-success" >
+                                  <a class="dropdown-item" href="/user/">MyChannels</a>
+                                  <br/>
+                                  <a class="dropdown-item" onclick="sign_out()" >Sign Out</a>
+                              </div>
+                          </div>
+                          <!--/Dropdown success-->
+                      </li>
+                  </div>
+                  <!--<li layout:fragment=""><div id="my-signin2" class="g-signin2" data-color="#8BC34A"></div></li>-->
+                  <!--<li layout:fragment=""><a href="#" class="sign_out" onclick="signOut();" id="center">Sign out</a></li>-->
               </ul>
             </div>
           </div>
