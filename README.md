@@ -7,7 +7,43 @@ A Java Spring Web App for Collecting Emotion Analytics for Online Video Content
 
 ## Testing Locally
 
-**Select and run the `GAE Local Dev` configuration**
+1. **Set current project**
+    
+    `gcloud config set project emotrace-x1`
+
+2. **Start GAE Datastore Emulator**
+
+    `gcloud beta emulators datastore start`
+
+3. **Set GAE Datastore Emulator Environment Variables (in another terminal)**
+
+    `$(gcloud beta emulators datastore env-init)`
+
+4. **Select and run the intelliJ `GAE Local Dev` configuration**
+
+5. **Open `http://localhost:8080` in your browser**
+
+#### Development Console
+
+`http://localhost:8000`
+
+#### gcloud commands
+
+**Set current project**
+
+`gcloud config set project PROJECT_NAME`
+
+**List current project**
+
+`gcloud config list`
+
+**Create GAE app**
+
+`gcloud app create`
+
+**Clear local datastore**
+
+`rm ~/.config/gcloud/emulators/datastore/WEB-INF/appengine-generated/local_db.bin`
 
 ## Deploying Remotely
 

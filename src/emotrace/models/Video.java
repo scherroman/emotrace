@@ -1,5 +1,6 @@
 package emotrace.models;
 
+import com.googlecode.objectify.Ref;
 import emotrace.models.Channel;
 
 import com.googlecode.objectify.Key;
@@ -14,18 +15,19 @@ import java.util.List;
 
 @Entity
 public class Video {
-  @Parent
-  Channel channel;
+  Key<Channel> channel;
 
   @Id public Long id;
-  public String name;
-  public String url;
+  @Index public String name;
+  @Index public String url;
   public String description;
+
+  public Video () {}
 
   /**
    * Simple Video constructor
    **/
-  public Video(Long id, String name, String url, Channel channel, String description) {
+  public Video(Key<Channel> channel, Long id, String name, String url, String description) {
     this.channel = channel;
     this.id = id;
     this.name = name;
