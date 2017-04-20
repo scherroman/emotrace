@@ -5,6 +5,16 @@
 .dark-primary-color    { background-color: #689F38; }
 .light-primary-color   { sbackground-color: #DCEDC8; }
 
+.btn { outline: 0 !important; }
+
+/* floating action buttons */
+
+.main-fab {
+    position: absolute !important;
+    bottom: 24px;
+    right: 24px;
+}
+
 /* cards */
 
 .card-link { text-decoration: none !important; }

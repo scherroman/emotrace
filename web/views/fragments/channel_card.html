@@ -1,0 +1,6 @@
+<th:block layout:fragment="channel_card(channel)">
+    <div layout:replace="fragments/text_card :: text_card(link=@{~/channel/} + ${channel.id},
+                                                          title=${channel.name},
+                                                          description=${channel.description})">
+    </div>
+</th:block>
