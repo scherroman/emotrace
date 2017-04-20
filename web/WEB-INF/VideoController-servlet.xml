@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="VideoController" class="emotrace.controllers.VideoController"/>
+    <bean id="videoController" class="emotrace.controllers.VideoController"/>
 
 </beans>
