@@ -56,7 +56,7 @@
 
     <servlet-mapping>
         <servlet-name>ChannelsController</servlet-name>
-        <url-pattern>/channels</url-pattern>
+        <url-pattern>/channels/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -82,7 +82,7 @@
 
     <servlet-mapping>
         <servlet-name>UsersController</servlet-name>
-        <url-pattern>/users</url-pattern>
+        <url-pattern>/users/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

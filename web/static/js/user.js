@@ -2,6 +2,8 @@
  * Created by romanscher on 4/19/17.
  */
 $( document ).ready(function() {
+    $.getScript("/static/js/components/load_more.js", function(){});
+    // Create Channel
     $(document).on('click', '.main-fab', function() {
         var modal = $('#create-channel-modal');
         var create_channel_form = $('#create-channel-form');
@@ -21,16 +23,12 @@ $( document ).ready(function() {
         var create_channel_form = $('#create-channel-form');
         var channels_div = $('#channels');
 
-        console.log("submit");
-
-        //Submit comment post
         $.ajax({
             url: create_channel_form.attr('action'),
             data: $(create_channel_form).serialize(),
             type: 'POST',
             success: function(response) {
-                var channel = response
-                channels_div.append(channel)
+                channels_div.append(response);
             },
             error: function(error) {
                 console.log(error);
