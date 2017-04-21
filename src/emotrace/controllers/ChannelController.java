@@ -1,6 +1,5 @@
 package emotrace.controllers;
 
-import com.googlecode.objectify.Key;
 import emotrace.models.Channel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +22,7 @@ public class ChannelController {
 
         model.addAttribute("channel", channel);
 
-        LoginController.addUsernameToTemplate(modelMap);
+        LoginController.add_current_user_info_to_template(modelMap);
 
         return "channel";
     }

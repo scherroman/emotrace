@@ -25,7 +25,7 @@ public class ChannelsController {
 
         model.addAttribute("channels", channels);
 
-        LoginController.addUsernameToTemplate(modelMap);
+        LoginController.add_current_user_info_to_template(modelMap);
 
         return "channels";
     }
