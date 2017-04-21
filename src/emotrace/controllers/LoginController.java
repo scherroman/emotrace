@@ -2,7 +2,6 @@ package emotrace.controllers;
 
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
-import emotrace.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

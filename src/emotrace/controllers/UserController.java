@@ -38,6 +38,8 @@ public class UserController {
 
         model.addAttribute("channels", channels);
 
-        return "fragment_collections/channel_cards";
+        return "fragment_collections/channel_cards_editable";
     }
+
+
 }

@@ -4,23 +4,25 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <h1 th:text="'User ' + ${user_id} + ''"></h1>
-            <a href="javascript:void(0)" class="btn btn-primary btn-fab main-fab">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h2 th:text="'User ' + ${user_id} + ' channels'"></h2>
+                </div>
+            </div>
+            <a class="btn btn-primary btn-fab main-fab">
                 <i class="material-icons">add</i>
             </a>
             <div id="channels" class="row load_more_content">
-                <th:block th:each="channel : ${channels}">
-                    <div layout:replace="fragments/text_card :: text_card(link=@{~/channel/} + ${channel.id}, title=${channel.name}, description=${channel.description})"></div>
-                </th:block>
+                <th:block layout:replace="fragment_collections/channel_cards_editable :: channel_cards_editable(channels=${channels})"></th:block>
             </div>
 
             <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/user/} + ${user_id} + @{/channels/scroll})"></th:block>
 
             <div layout:replace="fragments/modal :: modal(id='create-channel-modal', submit_button_id='create-channel-submit')">
                 <div layout:fragment="modal-content">
-                    <form id="create-channel-form" th:action="@{~/channel/forms/create}" th:object="${form_channel}" method="POST"
+                    <form id="create-channel-form" th:action="@{~/channel/forms/create_editable}" th:object="${form_channel}" method="POST"
                       th:attr="data-user-id=${user_id}, data-form-title='Create Channel'">
-                        <input type="hidden" th:value="${user_id}" id="owner" name="owner" />
+                        <input type="hidden" th:value="${user_id}" name="owner" />
                         <input class="form-control name-field focus-field" type="text" placeholder="Name" th:field="*{name}" />
                         <textarea class="form-control" rows="3" placeholder="Description" th:field="*{description}"></textarea>
                     </form>

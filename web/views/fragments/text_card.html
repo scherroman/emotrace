@@ -1,10 +1,13 @@
-<div class="col-ms-6 col-sm-4 col-md-3" layout:fragment="text_card(link, title, description)">
-    <a class="card-link" th:href="${link}">
-        <div class="panel thumbnail card text-card">
-            <div class="caption">
-                <h4 class="card-title text-card-title" th:text="${title}">Card Name</h4>
-                <p class="text-card-description" th:text="${description}">Card Description</p>
+<div class="card-container col-ms-6 col-sm-4 col-md-3" layout:fragment="text_card(link, title, description)">
+    <div class="panel thumbnail card text-card">
+        <div class="caption">
+            <div class="btn-group more-button-container">
+                <th:block layout:fragment="edit-content"></th:block>
             </div>
+            <a class="card-link" th:href="${link}">
+                <h4 class="card-title text-card-title" th:text="${title}">Card Name</h4>
+            </a>
+            <p class="text-card-description" th:text="${description}">Card Description</p>
         </div>
-    </a>
+    </div>
 </div>

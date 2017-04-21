@@ -3,8 +3,9 @@
     </head>
     <body>
         <div layout:fragment="content">
-            <h1 th:text="'Channel ' + ${channel.id} + ''"></h1>
-            <a href="javascript:void(0)" class="btn btn-default btn-fab main-fab"><i class="material-icons">add</i></a>
+            <h1 th:text="'Channel ' + ${channel.name} + ''"></h1>
+            <a href="javascript:void(0)" class="btn btn-primary btn-fab main-fab"><i class="material-icons">add</i></a>
+            <h4 th:text="${channel.description}"></h4>
         </div>
     </body>
 </html>
