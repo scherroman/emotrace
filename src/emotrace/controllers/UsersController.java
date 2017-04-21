@@ -1,7 +1,7 @@
 package emotrace.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,7 +13,8 @@ public class UsersController {
 
     //SERVES A PAGE DISPLAYING ALL DIFFERENT USERS ON SITE
     @RequestMapping(value = "users", method = RequestMethod.GET)
-    public String users(){
+    public String users(ModelMap modelMap){
+        LoginController.add_current_user_info_to_template(modelMap);
         return "users";
     }
 }

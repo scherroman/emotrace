@@ -16,7 +16,7 @@
                 <th:block layout:replace="fragment_collections/channel_cards_editable :: channel_cards_editable(channels=${channels})"></th:block>
             </div>
 
-            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/user/} + ${user_id} + @{/channels/scroll})"></th:block>
+            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/user/} + ${user_id} + @{/channels_scroll})"></th:block>
 
             <div layout:replace="fragments/modal :: modal(id='create-channel-modal', submit_button_id='create-channel-submit')">
                 <div layout:fragment="modal-content">

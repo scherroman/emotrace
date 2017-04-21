@@ -45,7 +45,6 @@
 
             <!-- Login JS -->
             <script th:src="@{~/static/js/login.js}"></script>
-            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
         <title>Emotrace</title>
     </head>
@@ -72,8 +71,20 @@
                 </div>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                  <li layout:fragment=""><div id="my-signin2" class="g-signin2" data-color="#8BC34A"></div></li>
-                  <li layout:fragment=""><a href="#" class="sign_out" onclick="signOut();" id="center">Sign out</a></li>
+                  <th:block th:switch="${user_is_logged_in}">
+                      <li><a th:case="false" href="/login">Sign In</a></li>
+                      <li th:case="true" class="dropdown">
+                          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" th:inline="text">
+                              Welcome, [[${user_name}]]
+                              <b class="caret"></b>
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li><a th:href="${my_channel_url}">My Channels</a></li>
+                              <li class="divider"></li>
+                              <li><a href="/logout">Sign Out</a></li>
+                          </ul>
+                      </li>
+                  </th:block>
               </ul>
             </div>
           </div>

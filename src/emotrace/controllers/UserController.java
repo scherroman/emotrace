@@ -1,12 +1,11 @@
 package emotrace.controllers;
 
+import com.google.appengine.api.users.User;
 import emotrace.models.Channel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,17 +19,37 @@ public class UserController {
 
     //SERVES A PAGE DISPLAYING ALL CHANNELS ASSOCIATED WITH A SPECIFIC USER
     @RequestMapping(value = "{user_id}", method = RequestMethod.GET)
-    public String user(@PathVariable("user_id") String user_id, Model model){
+    public String user(@PathVariable("user_id") String user_id, Model model, ModelMap modelMap){
         List<Channel> channels = Channel.get_channels_by_owner(user_id, NUM_CHANNELS_PER_PAGE, 0);
 
         model.addAttribute("user_id", user_id);
         model.addAttribute("channels", channels);
         model.addAttribute("form_channel", new Channel());
 
+        //CHECK IF USER PAGE IS CURRENT USER'S OWN PAGE
+        boolean is_owner = false;
+        User current_user = LoginController.get_current_user();
+        if (current_user != null) {
+            String id = current_user.getUserId();
+            is_owner = id.equals(user_id);
+        }
+
+        model.addAttribute("is_owner", is_owner);
+        LoginController.add_current_user_info_to_template(modelMap);
+
         return "user";
     }
 
-    @RequestMapping(value = "{user_id}/channels/scroll", method = RequestMethod.GET)
+    //DISPLAY A PAGE DISPLAYING CHANNELS OF CURRENTLY LOGGED IN USER
+    @RequestMapping(value = "my_channel", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String my_channel(){
+        String user_id = LoginController.get_current_user().getUserId();
+
+        return "{\"user_id\":\"" + user_id + "\"}";
+    }
+
+    @RequestMapping(value = "{user_id}/channels_scroll", method = RequestMethod.GET)
     public String scroll_channels(@PathVariable("user_id") String user_id,
                                   @RequestParam("offset") int offset, Model model) {
         offset = offset * NUM_CHANNELS_PER_PAGE;

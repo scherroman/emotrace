@@ -1,11 +1,14 @@
 package emotrace.controllers;
 
-import com.googlecode.objectify.Key;
 import emotrace.models.Channel;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by nashahzad on 4/5/17.
@@ -15,10 +18,12 @@ public class ChannelController {
 
     // Displays a channel
     @RequestMapping(value = "/{channel_id}", method = RequestMethod.GET)
-    public String channel(@PathVariable("channel_id") Long channel_id, Model model){
+    public String channel(@PathVariable("channel_id") Long channel_id, Model model, ModelMap modelMap){
         Channel channel = Channel.get_channel_by_id(channel_id);
 
         model.addAttribute("channel", channel);
+
+        LoginController.add_current_user_info_to_template(modelMap);
 
         return "channel";
     }
