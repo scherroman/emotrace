@@ -7,17 +7,31 @@
 
 .btn { outline: 0 !important; }
 
-/* floating action buttons */
+/* action buttons */
 
 .main-fab {
-    position: absolute !important;
+    z-index: 1;
+    position: fixed !important;
     bottom: 24px;
     right: 24px;
 }
 
+.more-button-container {
+    margin: 0px;
+    position: absolute !important;
+    top: 16px;
+    right: 5px;
+}
+.more-button {
+    box-shadow: none !important;
+}
+
 /* cards */
 
-.card-link { text-decoration: none !important; }
+.card-link {
+    text-decoration: none !important;
+    color: inherit;
+}
 .card-link:hover .card-title {  color: #8BC34A; }
 .card {
     width: 196px;

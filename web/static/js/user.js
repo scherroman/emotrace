@@ -3,6 +3,7 @@
  */
 $( document ).ready(function() {
     $.getScript("/static/js/components/load_more.js", function(){});
+    $.getScript("/static/js/components/delete_card.js", function(){});
     // Create Channel
     $(document).on('click', '.main-fab', function() {
         var modal = $('#create-channel-modal');
@@ -28,7 +29,7 @@ $( document ).ready(function() {
             data: $(create_channel_form).serialize(),
             type: 'POST',
             success: function(response) {
-                channels_div.append(response);
+                channels_div.prepend(response);
             },
             error: function(error) {
                 console.log(error);
