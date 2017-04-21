@@ -67,7 +67,24 @@ detector.addEventListener("onStopFailure", function() {
 detector.addEventListener("onWebcamConnectSuccess", function() {
     console.log("I was able to connect to the camera successfully.");
     setInterval(function(){
-        console.log(JSON.stringify(aggregate));
+        // console.log(JSON.stringify(aggregate));
+        $.ajax({
+            type: "POST",
+            url: "/test",
+            // The key needs to match your method's input parameter (case-sensitive).
+            data: JSON.stringify(aggregate),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                debugger;
+                console.log("sent data!");
+
+                // window.location.href = data.url;
+            },
+            failure: function(errMsg) {
+                alert(errMsg);
+            }
+        });
         aggregate = {
             joy:0,
             sadness:0,
