@@ -49,6 +49,10 @@ A Java Spring Web App for Collecting Emotion Analytics for Online Video Content
 
 **Select and run the `GAE Remote Deploy` configuration**
 
+### Updating Remote Indexes
+
+`./appengine-java-sdk-1.9.46/bin/appcfg.sh update_indexes emotrace/web`
+
 ## Dev Guide
 
 **1 - Pull/Sync master for latest code**

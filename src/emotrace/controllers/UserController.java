@@ -40,15 +40,6 @@ public class UserController {
         return "user";
     }
 
-    //DISPLAY A PAGE DISPLAYING CHANNELS OF CURRENTLY LOGGED IN USER
-    @RequestMapping(value = "my_channel", method = RequestMethod.GET, produces = "application/json")
-    @ResponseBody
-    public String my_channel(){
-        String user_id = LoginController.get_current_user().getUserId();
-
-        return "{\"user_id\":\"" + user_id + "\"}";
-    }
-
     @RequestMapping(value = "{user_id}/channels_scroll", method = RequestMethod.GET)
     public String scroll_channels(@PathVariable("user_id") String user_id,
                                   @RequestParam("offset") int offset, Model model) {
