@@ -45,7 +45,6 @@
 
             <!-- Login JS -->
             <script th:src="@{~/static/js/login.js}"></script>
-            <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
         <title>Emotrace</title>
     </head>
@@ -72,31 +71,20 @@
                 </div>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                  <div th:switch="${name}">
-                      <li layout:fragment="login-tab">
-                          <button onclick="sign_in()" class="btn btn-light-green"
-                                  style="color:white;" th:case="none">Sign In</button>
-                          <!--<p th:case="none"></p>-->
-                          <!--<p th:case="*" th:text="${name}"></p>-->
-                          <!--Dropdown success-->
-                          <div class="dropdown" th:case="*">
-                              <!--Trigger-->
-                              <button class="btn btn-success dropdown-toggle" type="button"
-                                      id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true"
-                                      aria-expanded="false" style="color:white; font-size:12px;"
-                                      th:inline="text">Welcome [[${name}]]! </button>
-                              <!--Menu-->
-                              <div class="dropdown-menu dropdown-success" >
-                                  <a class="dropdown-item" onclick="mychannel()">MyChannels</a>
-                                  <br/>
-                                  <a class="dropdown-item" onclick="sign_out()" >Sign Out</a>
-                              </div>
-                          </div>
-                          <!--/Dropdown success-->
+                  <th:block th:switch="${user_is_logged_in}">
+                      <li><a th:case="false" href="/login">Sign In</a></li>
+                      <li th:case="true" class="dropdown">
+                          <a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown" th:inline="text">
+                              Welcome, [[${user_name}]]
+                              <b class="caret"></b>
+                          </a>
+                          <ul class="dropdown-menu">
+                              <li><a th:href="${my_channel_url}">My Channels</a></li>
+                              <li class="divider"></li>
+                              <li><a href="/logout">Sign Out</a></li>
+                          </ul>
                       </li>
-                  </div>
-                  <!--<li layout:fragment=""><div id="my-signin2" class="g-signin2" data-color="#8BC34A"></div></li>-->
-                  <!--<li layout:fragment=""><a href="#" class="sign_out" onclick="signOut();" id="center">Sign out</a></li>-->
+                  </th:block>
               </ul>
             </div>
           </div>

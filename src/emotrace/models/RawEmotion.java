@@ -9,8 +9,6 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 
 import java.lang.String;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 public class RawEmotion {
