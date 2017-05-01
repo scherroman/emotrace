@@ -51,7 +51,11 @@ A Java Spring Web App for Collecting Emotion Analytics for Online Video Content
 
 ### Updating Remote Indexes
 
-`./appengine-java-sdk-1.9.46/bin/appcfg.sh update_indexes emotrace/web`
+1. Modify `web/WEB-INF/datastore-indexes.xml`
+
+2. Update Indexes remotely
+
+    `./appengine-java-sdk-1.9.46/bin/appcfg.sh update_indexes emotrace/web`
 
 ## Dev Guide
 

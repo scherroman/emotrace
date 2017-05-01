@@ -1,11 +1,42 @@
 <html layout:decorate="~{base}">
     <head>
+        <script th:src="@{~/static/js/channel.js}"></script>
     </head>
     <body>
         <div layout:fragment="content">
-            <h1 class="page-title" th:text="'Channel ' + ${channel.name} + ''"></h1>
-            <a href="javascript:void(0)" class="btn btn-primary btn-fab main-fab"><i class="material-icons">add</i></a>
-            <h4 th:text="${channel.description}"></h4>
+            <div class="row">
+                <div class="col-xs-12 text-center page-title">
+                    <h1 th:text="'Channel ' + ${channel.name} + ''"></h1>
+                    <h4 th:text="${channel.description}"></h4>
+                </div>
+            </div>
+            <div id="videos" class="row loads-more-content">
+                <th:block th:switch="${is_owner}">
+                    <th:block th:case="true">
+                        <th:block layout:replace="fragment_collections/video_cards_editable :: video_cards_editable(videos=${videos})"></th:block>
+                    </th:block>
+                    <th:block th:case="false">
+                        <th:block layout:replace="fragment_collections/video_cards :: video_cards(videos=${videos})"></th:block>
+                    </th:block>
+                </th:block>
+            </div>
+
+            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/channel/} + ${channel.id} + @{/videos_scroll})"></th:block>
+
+            <th:block th:if="${is_owner}">
+                <th:block layout:replace="fragments/add_button :: add_button(target='#add-video-modal')"></th:block>
+
+                <div layout:replace="fragments/modal :: modal(id='add-video-modal', submit_button_id='add-video-submit')">
+                    <div layout:fragment="modal-content">
+                        <form id="add-video-form" th:action="@{~/video/forms/create_editable}" th:object="${form_video}" method="POST"
+                          th:attr="data-form-title='Add YouTube Video'">
+                            <input type="hidden" th:value="${channel.id}" name="channelId" />
+                            <input type="hidden" name="externalId" />
+                            <input class="form-control name-field focus-field" type="text" placeholder="url" name="url" />
+                        </form>
+                    </div>
+                </div>
+            </th:block>
         </div>
     </body>
 </html>

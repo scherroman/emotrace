@@ -5,7 +5,7 @@
     <body>
         <li class="active" layout:fragment="channels-tab"><a th:href="@{~/channels}">Channels</a></li>
         <div layout:fragment="content">
-            <div id="channels" class="row load_more_content">
+            <div id="channels" class="row loads-more-content">
                 <th:block layout:replace="fragment_collections/channel_cards :: channel_cards(channels=${channels})"></th:block>
             </div>
 

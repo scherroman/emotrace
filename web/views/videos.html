@@ -1,0 +1,40 @@
+<html layout:decorate="~{base}">
+    <head>
+        <script th:src="@{~/static/js/index.js}"></script>
+    </head>
+    <body>
+        <li class="active" layout:fragment="videos-tab"><a th:href="@{~/}">Videos</a></li>
+        <div layout:fragment="content">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h2 class="page-title">Recently Added</h2>
+                </div>
+            </div>
+            <div id="videos" class="row loads-more-content">
+                <th:block layout:replace="fragment_collections/video_cards :: video_cards(videos=${videos})"></th:block>
+            </div>
+
+            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/videos/scroll})"></th:block>
+
+            <!-- STATIC BACKUP CONTENT -->
+
+            <!--<div class="row">-->
+                <!--<div class="col-ms-6 col-sm-4 col-md-3" th:each="video : ${ {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16} }">-->
+                    <!--<a class="card-link" href="https://www.youtube.com/watch?v=h3kqBX1j7f8">-->
+                        <!--<div class="panel thumbnail card video-card">-->
+                            <!--<img src="http://placehold.it/196x110/EEE" class="img-responsive">-->
+                            <!--<div class="caption">-->
+                                <!--<h5 class="card-title video-card-title">Video Name</h5>-->
+                                <!--<p>5 views</p>-->
+                                <!--<i class="material-icons card-bottom-left-icon">face</i>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row text-center">-->
+                <!--<a href="javascript:void(0)" class="btn btn-raised">Load More</a>-->
+            <!--</div>-->
+        </div>
+    </body>
+</html>

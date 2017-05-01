@@ -1,15 +1,15 @@
-<th:block layout:fragment="channel_card_editable(channel)">
-    <div layout:replace="fragments/channel_card :: channel_card(channel=${channel})">
+<th:block layout:fragment="video_card_editable(video)">
+    <div layout:replace="fragments/video_card :: video_card(video=${video})">
         <th:block layout:fragment="edit-content">
             <button type="button" class="edit-button close dropdown-toggle" data-toggle="dropdown">
               <i class="material-icons">more_vert</i>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
                 <li>
-                    <a th:id="${channel.id} + '-delete'" class="delete-card" href="javascript:void(0)">Delete</a>
-                    <form th:id="${channel.id} + '-delete-form'" th:action="@{~/channel/forms/delete}" th:object="${channel}" method="POST"
+                    <a th:id="${video.video.id} + '-delete'" class="delete-card" href="javascript:void(0)">Delete</a>
+                    <form th:id="${video.video.id} + '-delete-form'" th:action="@{~/video/forms/delete}" th:object="${video}" method="POST"
                       th:attr="data-form-title='Delete Channel'" style="display: none;">
-                        <input type="hidden" th:value="*{id}" name="id" />
+                        <input type="hidden" th:value="*{video.id}" name="id" />
                     </form>
                 </li>
             </ul>

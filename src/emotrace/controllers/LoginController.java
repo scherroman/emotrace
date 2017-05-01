@@ -6,7 +6,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -29,12 +29,22 @@ public class LoginController {
         return userService.getCurrentUser();
     }
 
+    public static boolean is_current_user(String id) {
+        User current_user = get_current_user();
+
+        if (current_user == null) {
+            return false;
+        }
+
+        return id.equals(current_user.getUserId());
+    }
+
     /**
      * If user is logged in add their username to the template
      * otherwise, indicate to template that there is no logged in user
      * @param model ModelMap on which to add the attribute of the user's name
      */
-    public static void add_current_user_info_to_template(ModelMap model){
+    public static void add_current_user_info_to_template(Model model){
         UserService userService = UserServiceFactory.getUserService();
 
         boolean user_is_logged_in = userService.isUserLoggedIn();
@@ -44,6 +54,8 @@ public class LoginController {
             model.addAttribute("my_channel_url", "/user/" + userService.getCurrentUser().getUserId());
         }
     }
+
+    // INTERNAL ROUTES
 
     @RequestMapping(value = "login", method = RequestMethod.GET, produces = "application/json")
     public String login(@RequestHeader(value = "referer") String referer){

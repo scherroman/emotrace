@@ -5,4 +5,8 @@
         <property name="owner" direction="asc"/>
         <property name="name" direction="asc"/>
     </datastore-index>
+    <datastore-index kind="Video" ancestor="false" source="manual">
+        <property name="channel" direction="asc"/>
+        <property name="dateCreated" direction="desc"/>
+    </datastore-index>
 </datastore-indexes>
