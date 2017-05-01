@@ -5,29 +5,37 @@
     <body>
         <div layout:fragment="content">
             <div class="row">
-                <div class="col-xs-12 text-center">
-                    <h2 class="page-title" th:text="${user_id} + '\'s channels'"></h2>
+                <div class="col-xs-12 text-center page-title">
+                    <h2 th:text="${user_id} + '\'s channels'"></h2>
                 </div>
             </div>
-            <a class="btn btn-primary btn-fab main-fab">
-                <i class="material-icons">add</i>
-            </a>
-            <div id="channels" class="row load_more_content">
-                <th:block layout:replace="fragment_collections/channel_cards_editable :: channel_cards_editable(channels=${channels})"></th:block>
+            <div id="channels" class="row loads-more-content">
+                <th:block th:switch="${is_owner}">
+                    <th:block th:case="true">
+                        <th:block layout:replace="fragment_collections/channel_cards_editable :: channel_cards_editable(channels=${channels})"></th:block>
+                    </th:block>
+                    <th:block th:case="false">
+                        <th:block layout:replace="fragment_collections/channel_cards :: channel_cards(channels=${channels})"></th:block>
+                    </th:block>
+                </th:block>
             </div>
 
             <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/user/} + ${user_id} + @{/channels_scroll})"></th:block>
 
-            <div layout:replace="fragments/modal :: modal(id='create-channel-modal', submit_button_id='create-channel-submit')">
-                <div layout:fragment="modal-content">
-                    <form id="create-channel-form" th:action="@{~/channel/forms/create_editable}" th:object="${form_channel}" method="POST"
-                      th:attr="data-user-id=${user_id}, data-form-title='Create Channel'">
-                        <input type="hidden" th:value="${user_id}" name="owner" />
-                        <input class="form-control name-field focus-field" type="text" placeholder="Name" th:field="*{name}" />
-                        <textarea class="form-control" rows="3" placeholder="Description" th:field="*{description}"></textarea>
-                    </form>
+            <th:block th:if="${is_owner}">
+                <th:block layout:replace="fragments/add_button :: add_button(target='#create-channel-modal')"></th:block>
+
+                <div layout:replace="fragments/modal :: modal(id='create-channel-modal', submit_button_id='create-channel-submit')">
+                    <div layout:fragment="modal-content">
+                        <form id="create-channel-form" th:action="@{~/channel/forms/create_editable}" th:object="${form_channel}" method="POST"
+                          th:attr="data-user-id=${user_id}, data-form-title='Create Channel'">
+                            <input type="hidden" th:value="${user_id}" name="owner" />
+                            <input class="form-control name-field focus-field" type="text" placeholder="Name" th:field="*{name}" />
+                            <textarea class="form-control" rows="3" placeholder="Description" th:field="*{description}"></textarea>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </th:block>
         </div>
     </body>
 </html>

@@ -3,19 +3,17 @@
  */
 $( document ).ready(function() {
     // Load More
-    offset = 1;
     $(document).on('click', '#load_more', function() {
         var load_more_button = $(this);
-        var load_more_content = $('.load_more_content');
+        var content = $('.loads-more-content');
         var url = $(this).data('url');
-        url += "?offset=" + offset;
-        offset += 1;
+        url += "?offset=" + content.find(".card").length;
 
         $.ajax({
             url: url,
             type: 'GET',
             success: function(response) {
-                load_more_content.append(response);
+                content.append(response);
 
                 if (!$.trim(response)) {
                     // Disable load more button if no more content
@@ -24,7 +22,7 @@ $( document ).ready(function() {
             },
             error: function(error) {
                 console.log(error);
-                alert(error)
+                alert(error.statusText)
             },
             complete: function(data) {}
         });

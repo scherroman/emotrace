@@ -1,0 +1,15 @@
+<div class="col-ms-6 col-sm-4 col-md-3" layout:fragment="video_card(video)">
+    <a class="card-link" th:href="@{~/video/} + ${video.video.id}">
+        <div class="panel thumbnail card video-card">
+            <img th:src="${video.thumbnail}" class="img-responsive">
+            <div class="caption">
+                <div class="btn-group edit-button-container">
+                    <th:block layout:fragment="edit-content"></th:block>
+                </div>
+                <h5 class="card-title video-card-title" th:text="${video.title}">Video Name</h5>
+                <p th:inline="text">[[${video.video.numViews}]] views</p>
+                <i class="material-icons card-bottom-left-icon" th:text="${video.emoji}">face</i>
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,5 @@
+<th:block layout:fragment="video_cards(videos)">
+    <th:block th:each="video : ${videos}">
+        <div layout:replace="fragments/video_card :: video_card(video=${video})"></div>
+    </th:block>
+</th:block>
