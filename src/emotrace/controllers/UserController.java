@@ -2,6 +2,7 @@ package emotrace.controllers;
 
 import com.google.appengine.api.users.User;
 import emotrace.models.Channel;
+import emotrace.services.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class UserController {
         model.addAttribute("user_id", user_id);
         model.addAttribute("channels", channels);
         model.addAttribute("form_channel", new Channel());
-        model.addAttribute("is_owner", LoginController.is_current_user(user_id));
-        LoginController.add_current_user_info_to_template(model);
+        model.addAttribute("is_owner", LoginService.is_current_user(user_id));
+        LoginService.add_current_user_info_to_template(model);
 
         return "user";
     }
@@ -40,7 +41,7 @@ public class UserController {
 
         model.addAttribute("channels", channels);
 
-        if (LoginController.is_current_user(user_id)) {
+        if (LoginService.is_current_user(user_id)) {
             return "fragment_collections/channel_cards_editable";
         }
         else {

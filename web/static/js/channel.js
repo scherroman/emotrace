@@ -16,7 +16,15 @@ $( document ).ready(function() {
             return;
         }
 
-        var video_id = url.split("watch?v=")[1];
+        // Regex from http://stackoverflow.com/q/10591547/4155686
+        var video_id = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+        video_id = video_id[1];
+        if(video_id == null) {
+            console.log("The youtube url is not valid.");
+            alert("That youtube url doesn't work. Try another!");
+            return;
+        }
+
         add_video_form.find('input[name="externalId"]').val(video_id);
 
         $.ajax({
