@@ -20,16 +20,14 @@ public class User {
     @Index String googleID;
     @Index public String nickName;
     public String email;
-    public String description;
     @Index public Date dateCreated;
 
     public User() {}
 
-    public User(String googleID, String nickName, String email, String description) {
+    public User(String googleID, String nickName, String email) {
         this.googleID = googleID;
         this.nickName = nickName;
         this.email = email;
-        this.description = description;
     }
 
     // GETTERS & SETTERS
@@ -66,14 +64,6 @@ public class User {
         this.email = email;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Date getDateCreated() {
         return dateCreated;
     }
@@ -97,12 +87,13 @@ public class User {
         return ofy().load().key(User.getKey(id)).now();
     }
 
+
     /**
      * Retrieves a user by googleID
      * @param gid The googleID of the user
      */
     public static User get_user_by_googleID(String gid) {
-        return ofy().load().type(User.class).filter("googleID", gid).now();
+        return ofy().load().type(User.class).filter("googleID", gid).first().now();  // there should only be one result
     }
 
     /**
@@ -110,12 +101,12 @@ public class User {
      * @param num_users Number of users to retrieve at a time
      * @param offset Number of users to offset retrieval by
      */
-    public static List<User> scroll_channels(int num_users, int offset) {
+    public static List<User> scroll_users(int num_users, int offset) {
         return ofy().load().type(User.class).order("nickName").limit(num_users).offset(offset).list();
     }
 
     /**
-     * Creates this channel
+     * Creates this user
      */
     public Key<User> create() {
         this.dateCreated = new Date();
