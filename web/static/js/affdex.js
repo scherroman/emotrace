@@ -1,5 +1,5 @@
 /**
- * Created by esamudio on 4/6/17.
+ * Reference file to affdex.js script
  */
 
 "use strict";

@@ -15,29 +15,26 @@ import java.util.List;
 public class DisplayVideo {
 
     public Video video;
+    public Channel channel;
     public String title;
     public String thumbnail;
     public String emoji;
 
-    public DisplayVideo() {
-        super();
-    }
+    public DisplayVideo() {}
 
     public DisplayVideo(Video video) {
         this.video = video;
+        this.channel = Channel.get_channel_by_id(this.video.channel.getId());
     }
 
-    public DisplayVideo(Video video, String title, String thumbnail, String emoji) {
-        this.video = video;
-        this.title = title;
-        this.thumbnail = thumbnail;
-        this.emoji = emoji;
+    public static DisplayVideo display_video_from_video(Video video) {
+        return new DisplayVideo(video);
     }
 
     public static List<DisplayVideo> display_videos_from_videos(List<Video> videos) {
         List<DisplayVideo> display_videos = new ArrayList<>();
         for (Video video : videos) {
-			display_videos.add(new DisplayVideo(video));
+			display_videos.add(DisplayVideo.display_video_from_video(video));
 		}
 
 		return display_videos;
