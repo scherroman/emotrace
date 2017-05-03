@@ -35,6 +35,17 @@
                         </form>
                     </div>
                 </div>
+
+                <div layout:replace="fragments/modal :: modal(id='edit-channel-modal', submit_button_id='edit-channel-submit')">
+                    <div layout:fragment="modal-content">
+                        <form id="edit-channel-form" th:action="@{~/channel/forms/edit_channel}" th:object="${form_channel}" method="POST"
+                              th:attr="data-user-id=${user_id}, data-form-title='Edit Channel'">
+                            <input type="hidden" name="id" id="channel_id" th:field="*{id}" />
+                            <input class="form-control name-field focus-field" type="text" placeholder="Name" th:field="*{name}" />
+                            <textarea class="form-control" rows="3" placeholder="Description" th:field="*{description}"></textarea>
+                        </form>
+                    </div>
+                </div>
             </th:block>
         </div>
     </body>

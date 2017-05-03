@@ -103,6 +103,25 @@ public class ChannelController {
      * @return HttpStatus.OK
      */
     @RequestMapping(value = "/forms/rename", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    public void update_channel(@ModelAttribute Channel channel) {}
+    public String rename_channel() {
+        return "";
+    }
+
+    /**
+     * Updates Channel name and description in datastore
+     * @param channel Channel object with info to put into datastore
+     * @param model Model object of the page
+     * @return Returns a new card with the updated info
+     */
+    @RequestMapping(value = "/forms/edit_channel", method = RequestMethod.POST)
+    public String edit_channel(@ModelAttribute Channel channel, Model model){
+        Channel toChange = Channel.get_channel_by_id(channel.getId());
+        toChange.setName(channel.getName());
+        toChange.setDescription(channel.getDescription());
+        toChange.create();
+
+        model.addAttribute("channel", channel);
+
+        return "fragments/channel_card_editable";
+    }
 }

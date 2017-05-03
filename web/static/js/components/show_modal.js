@@ -6,6 +6,8 @@ $(document).on('click', '.shows-modal', function() {
     var form = modal.find('form').first();
     var modal_title = form.data('form-title');
 
+    console.log("modal");
+
     modal.find('.modal-title').text(modal_title);
 
     modal.on('shown.bs.modal', function () {
