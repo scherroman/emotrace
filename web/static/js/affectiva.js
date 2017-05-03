@@ -14,6 +14,23 @@ var width = 640;
 // The captured frame's height in pixels
 var height = 480;
 
+// How long to aggregate data for (in ms)
+var seconds = 1000
+
+var aggregate = {
+                joy:0,
+                sadness:0,
+                disgust:0,
+                contempt:0,
+                anger:0,
+                fear:0,
+                surprise:0,
+                valence:0,
+                engagement:0
+                };
+
+
+
 /*
  Face detector configuration - If not specified, defaults to
  affdex.FaceDetectorMode.LARGE_FACES
@@ -49,6 +66,37 @@ detector.addEventListener("onStopFailure", function() {
 });
 detector.addEventListener("onWebcamConnectSuccess", function() {
     console.log("I was able to connect to the camera successfully.");
+    setInterval(function(){
+        // console.log(JSON.stringify(aggregate));
+        $.ajax({
+            type: "POST",
+            url: "/test",
+            // The key needs to match your method's input parameter (case-sensitive).
+            data: JSON.stringify(aggregate),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                debugger;
+                console.log("sent data!");
+
+                // window.location.href = data.url;
+            },
+            failure: function(errMsg) {
+                alert(errMsg);
+            }
+        });
+        aggregate = {
+            joy:0,
+            sadness:0,
+            disgust:0,
+            contempt:0,
+            anger:0,
+            fear:0,
+            surprise:0,
+            valence:0,
+            engagement:0
+        };
+    }, seconds);
 });
 
 detector.addEventListener("onWebcamConnectFailure", function() {
@@ -64,11 +112,24 @@ detector.addEventListener("onWebcamConnectFailure", function() {
  - timestamp: The timestamp of the captured image in seconds.
  */
 detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
-    console.log("IMAGE RESULTS SUCCESS");
-    console.log("timestamp: " + timestamp.toFixed(2));
-    console.log("Emotions: " + JSON.stringify(faces[0].emotions, function(key, val) {
-            return val.toFixed ? Number(val.toFixed(0)) : val;
-        }));
+    //aggregate data
+    aggregate['joy'] += faces[0].emotions.joy;
+    aggregate['sadness'] += faces[0].emotions.sadness;
+    aggregate['disgust'] += faces[0].emotions.disgust;
+    aggregate['contempt'] += faces[0].emotions.contempt;
+    aggregate['anger'] += faces[0].emotions.anger;
+    aggregate['fear'] += faces[0].emotions.fear;
+    aggregate['surprise'] += faces[0].emotions.surprise;
+    aggregate['valence'] += faces[0].emotions.valence;
+    aggregate['engagement'] += faces[0].emotions.engagement;
+
+
+    // console.log("IMAGE RESULTS SUCCESS");
+    // console.log("timestamp: " + timestamp.toFixed(2));
+    // console.log("Emotions: " + JSON.stringify(faces[0].emotions.joy));
+    // console.log("Emotions: " + JSON.stringify(faces[0].emotions, function(key, val) {
+    //         return val.toFixed ? Number(val.toFixed(0)) : val;
+    //     }));
 });
 
 /*
