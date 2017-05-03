@@ -107,6 +107,19 @@
     </servlet>
 
     <servlet-mapping>
+        <servlet-name>VideosController</servlet-name>
+        <url-pattern>/videos/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>VideosController</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
         <servlet-name>TestController</servlet-name>
         <url-pattern>/test</url-pattern>
     </servlet-mapping>

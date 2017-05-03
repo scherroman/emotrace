@@ -3,7 +3,7 @@
  */
 $( document ).ready(function() {
     // Delete
-    $(document).on('click', '.delete', function() {
+    $(document).on('click', '.delete-card', function() {
         var element_to_delete = $(this).closest('.card-container');
         var delete_id = $(this).attr('id').split('-')[0];
         var delete_form = $('#' + delete_id + '-delete-form');
@@ -17,7 +17,7 @@ $( document ).ready(function() {
             },
             error: function(error) {
                 console.log(error);
-                alert(error)
+                alert(error.statusText)
             },
             complete: function(data) {}
         });

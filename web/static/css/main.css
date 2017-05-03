@@ -8,6 +8,7 @@
 .btn { outline: 0 !important; }
 
 .page-title {
+    word-wrap: break-word;
     margin-bottom: 25px;
 }
 
@@ -20,13 +21,19 @@
     right: 24px;
 }
 
-.more-button-container {
+.edit-button-container {
     margin: 0px;
     position: absolute !important;
+}
+.text-card .edit-button-container {
     top: 16px;
     right: 5px;
 }
-.more-button {
+.video-card .edit-button-container {
+    top: 125px;
+    right: 5px;
+}
+.edit-button {
     box-shadow: none !important;
 }
 

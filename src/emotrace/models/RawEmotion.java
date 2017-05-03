@@ -12,7 +12,7 @@ import java.lang.String;
 
 @Entity
 public class RawEmotion {
-  Key<Video> video;
+  @Index Key<Video> video;
 
   @Id public Long id;
   @Index public double timestamp;
@@ -29,12 +29,9 @@ public class RawEmotion {
 
   public RawEmotion () {}
 
-  /**
-   * Simple RawEmotion constructor
-   **/
-  public RawEmotion(Key<Video> video, Long id, double timestamp, int joy, int sadness, int disgust, int contempt,
+  public RawEmotion(Long video_id, Long id, double timestamp, int joy, int sadness, int disgust, int contempt,
                     int anger, int fear, int surprise, int valence, int engagement, String emoji) {
-  	this.video = video;
+  	this.video = Video.getKey(video_id);
     this.id = id;
     this.timestamp = timestamp;
     this.joy = joy;
