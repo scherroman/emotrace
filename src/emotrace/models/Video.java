@@ -85,6 +85,10 @@ public class Video {
         return ofy().load().key(Video.getKey(id)).now();
     }
 
+    public static Video get_video_by_id(String id) {
+        return get_video_by_id(Long.parseLong(id));
+    }
+
     /**
      * Retrieves a list of videos by owner, sorted by name
      * @param num_videos Number of videos to retrieve at a time
