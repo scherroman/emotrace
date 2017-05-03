@@ -63,6 +63,16 @@ public class LoginController {
         return "redirect:" + userService.createLoginURL(referer);
     }
 
+
+//    // return url from google login  /logginreturn/whereyouwerebefore
+//    @RequestMapping(value = "loginreturn/{referer}", method = RequestMethod.GET, produces = "application/json")
+//    public String login2(@RequestHeader(value = "referer") String referer){
+//        // with login unfo check if user exists, if not insert login data into table
+//        UserService userService = UserServiceFactory.getUserService();
+//        return "redirect:" + userService.createLoginURL(referer);
+//    }
+
+
     @RequestMapping(value = "logout", method = RequestMethod.GET, produces = "application/json")
     public String logout(@RequestHeader(value = "referer") String referer){
         UserService userService = UserServiceFactory.getUserService();
