@@ -1,5 +1,5 @@
 /**
- * Created by esamudio on 4/6/17.
+ * Affectiva API Tutorial
  */
 
 // SDK Needs to create video and canvas nodes in the DOM in order to function
