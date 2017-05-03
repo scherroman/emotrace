@@ -30,8 +30,7 @@ public class UserController {
         boolean is_owner = false;
         User current_user = LoginController.get_current_user();
         if (current_user != null) {
-            String id = current_user.getUserId();
-            is_owner = id.equals(user_id);
+            is_owner = user_id.equals(current_user.getUserId());
         }
 
         model.addAttribute("is_owner", is_owner);

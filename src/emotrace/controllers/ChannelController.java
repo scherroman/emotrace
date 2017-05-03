@@ -58,4 +58,11 @@ public class ChannelController {
     public String rename_channel() {
         return "";
     }
+
+    @RequestMapping(value = "/forms/edit_channel", method = RequestMethod.POST)
+    public String edit_channel(@ModelAttribute Channel channel, Model model){
+        String s = "fdsa";
+        System.out.println("triggered");
+        return "";
+    }
 }

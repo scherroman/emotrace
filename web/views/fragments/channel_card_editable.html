@@ -14,6 +14,13 @@
                     <input type="hidden" th:value="*{id}" name="id" />
                 </form>
             </li>
+            <li>
+                <a th:id="${channel.id} + '-' + ${channel.name} + '-' + ${channel.description} + '-edit_channel'" class="edit_channel" href="javascript:void(0)">Edit </a>
+                <form th:id="${channel.id} + '-' + ${channel.name} + '-' + ${channel.description} + '-edit_channel'" th:action="@{~/channel/forms/edit_channel}" th:object="${channel}" method="POST"
+                      th:attr="data-form-title='Edit Channel'" style="display:none;">
+                    <input type="hidden" th:value="*{id}" name="id" />
+                </form>
+            </li>
         </ul>
     </div>
 </th:block>
