@@ -3,6 +3,7 @@
  */
 
 $(document).ready(function() {
+    $.getScript("/static/js/components/delete_card.js", function(){});
 
     // LOAD YOUTUBE VIDEO //
 
