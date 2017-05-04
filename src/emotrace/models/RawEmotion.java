@@ -25,12 +25,11 @@ public class RawEmotion {
   public int surprise;
   public int valence;
   public int engagement;
-  public String emoji;
 
   public RawEmotion () {}
 
   public RawEmotion(Long video_id, Long id, double timestamp, int joy, int sadness, int disgust, int contempt,
-                    int anger, int fear, int surprise, int valence, int engagement, String emoji) {
+                    int anger, int fear, int surprise, int valence, int engagement) {
   	this.video = Video.getKey(video_id);
     this.id = id;
     this.timestamp = timestamp;
@@ -43,6 +42,5 @@ public class RawEmotion {
     this.surprise = surprise;
     this.valence = valence;
     this.engagement = engagement;
-    this.emoji = emoji;
   }
 }
