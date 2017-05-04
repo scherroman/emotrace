@@ -3,6 +3,7 @@ package emotrace.setup;
 import com.googlecode.objectify.ObjectifyService;
 import emotrace.models.Channel;
 import emotrace.models.RawEmotion;
+import emotrace.models.User;
 import emotrace.models.Video;
 import emotrace.services.YouTubeService;
 
@@ -28,6 +29,7 @@ public class Setup {
         ObjectifyService.register(Channel.class);
         ObjectifyService.register(Video.class);
         ObjectifyService.register(RawEmotion.class);
+        ObjectifyService.register(User.class);
 
         log.info("Done registering entities.");
     }
