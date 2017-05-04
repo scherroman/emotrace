@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import static emotrace.services.LoginService.get_current_user;
+
+
 /**
  * Created by nashahzad on 4/8/17.
  */
@@ -34,6 +37,7 @@ public class LoginController {
 
         //Get Current user using LoginService class
         User current_google_user = get_current_user();
+
         String user_id = current_google_user.getUserId();
         //check for user in db
         if(null == emotrace.models.User.get_user_by_googleID(user_id)){
