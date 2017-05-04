@@ -6,7 +6,7 @@
         <div layout:fragment="content">
             <div class="row">
                 <div class="col-xs-12 text-center page-title">
-                    <h2 th:text="${user_id} + '\'s channels'"></h2>
+                    <h2 th:text="${user.getNickName()} + '\'s channels'"></h2>
                 </div>
             </div>
             <div id="channels" class="row loads-more-content">

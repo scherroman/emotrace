@@ -1,11 +1,13 @@
 package emotrace.controllers;
 
-import com.google.appengine.api.users.User;
 import emotrace.models.Channel;
 import emotrace.services.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class UserController {
     public String user(@PathVariable("user_id") String user_id, Model model){
         List<Channel> channels = Channel.get_channels_by_owner(user_id, NUM_CHANNELS_PER_PAGE, 0);
 
-        model.addAttribute("user_id", user_id);
+        model.addAttribute("user", emotrace.models.User.get_user_by_googleID(user_id));
         model.addAttribute("channels", channels);
         model.addAttribute("form_channel", new Channel());
         model.addAttribute("is_owner", LoginService.is_current_user(user_id));
