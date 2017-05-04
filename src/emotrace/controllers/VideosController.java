@@ -2,6 +2,7 @@ package emotrace.controllers;
 
 import emotrace.models.DisplayVideo;
 import emotrace.models.Video;
+import emotrace.services.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +19,17 @@ public class VideosController {
 
     public static final int NUM_VIDEOS_PER_PAGE = 16;
 
+    // EXTERNAL ROUTES
+
     @RequestMapping(value = "videos", method = RequestMethod.GET)
     public String index(Model model) {
         List<Video> videos = Video.scroll_videos(NUM_VIDEOS_PER_PAGE, 0);
         // Create DisplayVideos, which add title, thumbnail, etc...
         List<DisplayVideo> display_videos = DisplayVideo.display_videos_from_videos(videos);
+        DisplayVideo.add_info_from_youtube(display_videos);
 
         model.addAttribute("videos", display_videos);
-        LoginController.add_current_user_info_to_template(model);
+        LoginService.add_current_user_info_to_template(model);
 
         return "videos";
     }
@@ -37,6 +41,7 @@ public class VideosController {
         List<Video> videos = Video.scroll_videos(NUM_VIDEOS_PER_PAGE, offset);
         // Create DisplayVideos, which add title, thumbnail, etc...
         List<DisplayVideo> display_videos = DisplayVideo.display_videos_from_videos(videos);
+        DisplayVideo.add_info_from_youtube(display_videos);
 
         model.addAttribute("videos", display_videos);
 

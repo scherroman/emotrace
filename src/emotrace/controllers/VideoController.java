@@ -2,10 +2,14 @@ package emotrace.controllers;
 
 import emotrace.models.DisplayVideo;
 import emotrace.models.Video;
+import emotrace.services.LoginService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by nashahzad on 4/3/2017.
@@ -21,8 +25,12 @@ public class VideoController {
      */
     @RequestMapping(value = "/{video_id}", method = RequestMethod.GET)
     public String video(@PathVariable("video_id") String video_id, Model model) {
-        model.addAttribute("video_id", video_id);
-        LoginController.add_current_user_info_to_template(model);
+        Video video = Video.get_video_by_id(video_id);
+        DisplayVideo display_video = DisplayVideo.display_video_from_video(video);
+        DisplayVideo.add_info_from_youtube(new ArrayList<>(Arrays.asList(display_video)));
+
+        model.addAttribute("video", display_video);
+        LoginService.add_current_user_info_to_template(model);
 
         return "video";
     }
@@ -55,6 +63,7 @@ public class VideoController {
         video.create();
 
         DisplayVideo display_video = new DisplayVideo(video);
+        DisplayVideo.add_info_from_youtube(new ArrayList<>(Arrays.asList(display_video)));
 
         model.addAttribute("video", display_video);
 
@@ -70,6 +79,7 @@ public class VideoController {
         video.create();
 
         DisplayVideo display_video = new DisplayVideo(video);
+        DisplayVideo.add_info_from_youtube(new ArrayList<>(Arrays.asList(display_video)));
 
         model.addAttribute("video", display_video);
 

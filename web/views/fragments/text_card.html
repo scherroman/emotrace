@@ -1,4 +1,4 @@
-<div class="card-container col-ms-6 col-sm-4 col-md-3" layout:fragment="text_card(link, title, description)">
+<div th:id="'card-container-' + ${channel.id}" class="card-container col-ms-6 col-sm-4 col-md-3" layout:fragment="text_card(link, title, description)">
     <div class="panel thumbnail card text-card">
         <div class="caption">
             <div class="btn-group edit-button-container">

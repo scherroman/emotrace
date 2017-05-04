@@ -5,6 +5,7 @@ import emotrace.models.Channel;
 import emotrace.models.RawEmotion;
 import emotrace.models.User;
 import emotrace.models.Video;
+import emotrace.services.YouTubeService;
 
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ public class Setup {
         log.info("Starting app...");
 
         registerEntities();
+        YouTubeService.init();
     }
 
     private void registerEntities() {

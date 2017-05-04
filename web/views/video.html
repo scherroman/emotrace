@@ -1,9 +1,27 @@
 <html layout:decorate="~{base}">
     <head>
+        <link rel="stylesheet" th:href="@{~/static/css/video.css}">
+
+        <script th:src="@{~/static/js/video.js}"></script>
     </head>
     <body>
+        <div layout:fragment="pre-content">
+            <!-- Needs max height both on row div & on iframe -->
+            <div class="row" style="max-height: 480px;">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <div id="player" th:attr="data-video-id=${video.video.externalId}"  style="max-height: 480px;"></div>
+                </div>
+            </div>
+        </div>
         <div layout:fragment="content">
-            <h1 th:text="'Video ' + ${video_id} + ''"></h1>
+            <div class="row">
+                <div class="col-xs-12 text-center page-title">
+                    <h2 th:text="${video.title}"></h2>
+                    <a th:href="@{~/channel/} + ${video.channel.id}" href="javascript:void(0)">
+                        <h4 th:text="${video.channel.name}"></h4>
+                    </a>
+                </div>
+            </div>
         </div>
     </body>
 </html>

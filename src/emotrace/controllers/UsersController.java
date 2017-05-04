@@ -1,5 +1,6 @@
 package emotrace.controllers;
 
+import emotrace.services.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,8 @@ public class UsersController {
     //SERVES A PAGE DISPLAYING ALL DIFFERENT USERS ON SITE
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String users(Model model){
-        LoginController.add_current_user_info_to_template(model);
+        LoginService.add_current_user_info_to_template(model);
+
         return "users";
     }
 }
