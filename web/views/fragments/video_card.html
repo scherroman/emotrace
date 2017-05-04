@@ -1,4 +1,4 @@
-<div class="col-ms-6 col-sm-4 col-md-3" layout:fragment="video_card(video)">
+<div class="card-container col-ms-6 col-sm-4 col-md-3" layout:fragment="video_card(video)">
     <div class="panel thumbnail card video-card">
         <a class="card-link" th:href="@{~/video/} + ${video.video.id}">
             <img th:src="${video.thumbnail}" class="img-responsive">
