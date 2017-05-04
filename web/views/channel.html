@@ -8,6 +8,12 @@
                 <div class="col-xs-12 text-center page-title">
                     <h1 th:text="'Channel ' + ${channel.name} + ''"></h1>
                     <h4 th:text="${channel.description}"></h4>
+                    <h4 th:inline="text">
+                        by
+                        <a th:href="@{~/user/} + ${user.googleID}" href="javascript:void(0)">
+                            [[${user.nickName}]]
+                        </a>
+                    </h4>
                 </div>
             </div>
             <div id="videos" class="row loads-more-content">

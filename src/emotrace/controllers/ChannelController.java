@@ -2,6 +2,7 @@ package emotrace.controllers;
 
 import emotrace.models.Channel;
 import emotrace.models.DisplayVideo;
+import emotrace.models.User;
 import emotrace.models.Video;
 import emotrace.services.LoginService;
 import org.springframework.http.HttpStatus;
@@ -28,11 +29,13 @@ public class ChannelController {
     @RequestMapping(value = "/{channel_id}", method = RequestMethod.GET)
     public String channel(@PathVariable("channel_id") Long channel_id, Model model){
         Channel channel = Channel.get_channel_by_id(channel_id);
+        User user = User.get_user_by_googleID(channel.owner);
         List<Video> videos = Video.get_videos_by_channel_id(channel_id, NUM_VIDEOS_PER_PAGE, 0);
         List<DisplayVideo> display_videos = DisplayVideo.display_videos_from_videos(videos);
         DisplayVideo.add_info_from_youtube(display_videos);
 
         model.addAttribute("channel", channel);
+        model.addAttribute("user", user);
         model.addAttribute("videos", display_videos);
         model.addAttribute("form_video", new Video());
         model.addAttribute("is_owner", LoginService.is_current_user(channel.owner));
