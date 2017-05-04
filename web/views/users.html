@@ -1,10 +1,15 @@
 <html layout:decorate="~{base}">
     <head>
+        <script th:src="@{~/static/js/users.js}"></script>
     </head>
     <body>
         <li class="active" layout:fragment="users-tab"><a th:href="@{~/users}">Users</a></li>
         <div layout:fragment="content">
-            <h1>Users</h1>
+            <div id="users" class="row loads-more-content">
+                <th:block layout:replace="fragment_collections/user_cards :: user_cards(users=${users})"></th:block>
+            </div>
+
+            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/users/scroll})"></th:block>
         </div>
     </body>
 </html>

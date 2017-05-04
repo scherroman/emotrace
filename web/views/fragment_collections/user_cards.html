@@ -1,0 +1,5 @@
+<th:block layout:fragment="user_cards(users)">
+    <th:block th:each="user : ${users}">
+        <div layout:replace="fragments/user_card :: user_card(user=${user})"></div>
+    </th:block>
+</th:block>

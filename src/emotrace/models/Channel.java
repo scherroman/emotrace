@@ -6,6 +6,7 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -117,9 +118,17 @@ public class Channel {
     }
 
     /**
-     * Deletes this channel
+     * Deletes this channel, and all videos under it
      */
     public void delete() {
         ofy().delete().entity(this).now();
+
+        List<Video> videos = ofy().load().type(Video.class).filter("channel", Channel.getKey(this.id)).list();
+        List<Long> video_ids = new ArrayList<>();
+        for(Video video : videos){
+            video_ids.add(video.id);
+        }
+
+        ofy().delete().type(Video.class).ids(video_ids).now();
     }
 }
