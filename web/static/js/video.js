@@ -5,12 +5,25 @@
 // ytplayer
 var player = null;
 
-// timer to collect data over <seconds>
-var timer = undefined;
+// timer to collect data every <aggregate_ms>
+var aggregate_timer = undefined;
+
+// timer to push data to server every <server_ms>
+var push_timer = undefined;
+
+// boolean to keep track of whether to aggregate data or not
+var isCollecting = false;
 
 // How long to aggregate data for (in ms)
-var seconds = 10;
+var aggregate_ms = 1000;
 
+// How often to send data to server
+var server_ms = 60000;
+
+// number of times data was collected
+var times_collected = 0;
+
+// skeleton of json to collect data
 var aggregate = {
     joy:0,
     sadness:0,
@@ -23,6 +36,9 @@ var aggregate = {
     engagement:0,
     timestamp:0
 };
+
+// array of data to send over longer period of time
+var data_arr = []
 
 /*
  Face detector configuration - If not specified, defaults to
@@ -71,16 +87,19 @@ $(document).ready(function() {
         onStart();
         detector.addEventListener("onWebcamConnectSuccess", onWebcamConnectSuccess(event));
         detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
-            //aggregate data
-            aggregate['joy'] += faces[0].emotions.joy;
-            aggregate['sadness'] += faces[0].emotions.sadness;
-            aggregate['disgust'] += faces[0].emotions.disgust;
-            aggregate['contempt'] += faces[0].emotions.contempt;
-            aggregate['anger'] += faces[0].emotions.anger;
-            aggregate['fear'] += faces[0].emotions.fear;
-            aggregate['surprise'] += faces[0].emotions.surprise;
-            aggregate['valence'] += faces[0].emotions.valence;
-            aggregate['engagement'] += faces[0].emotions.engagement;
+            if(isCollecting){
+                //aggregate data
+                times_collected++;
+                aggregate['joy'] += faces[0].emotions.joy;
+                aggregate['sadness'] += faces[0].emotions.sadness;
+                aggregate['disgust'] += faces[0].emotions.disgust;
+                aggregate['contempt'] += faces[0].emotions.contempt;
+                aggregate['anger'] += faces[0].emotions.anger;
+                aggregate['fear'] += faces[0].emotions.fear;
+                aggregate['surprise'] += faces[0].emotions.surprise;
+                aggregate['valence'] += faces[0].emotions.valence;
+                aggregate['engagement'] += faces[0].emotions.engagement;
+            }
 
         });
     }
@@ -89,10 +108,20 @@ $(document).ready(function() {
     //    YT.PlayerState.PLAYING indicates when a video starts playing (state=1)
     function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING) {
-            timer.resume();
+            isCollecting = true;
+            aggregate_timer.resume();
+            push_timer.resume()
         }
         else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.BUFFERING){
-            timer.pause()
+            isCollecting = false;
+            aggregate_timer.pause();
+            push_timer.pause();
+        }
+        else if (event.data == YT.PlayerState.ENDED){
+            isCollecting = false;
+            aggregate_timer.stop();
+            push_timer.stop();
+            pushData();
         }
     }
 
@@ -104,38 +133,22 @@ $(document).ready(function() {
 function onWebcamConnectSuccess(event) {
     console.log("I was able to connect to the camera successfully.");
     event.target.playVideo();
-    timer = new IntervalTimer(interval, seconds);
-    // setInterval(interval, seconds);
+    isCollecting = true;
+    aggregate_timer = new IntervalTimer(interval, aggregate_ms);
+    push_timer = new IntervalTimer(pushData, server_ms);
 }
 
-// function that makes ajax call to server and resets data aggregation every <seconds>
+// function that makes ajax call to server and resets data aggregation every <aggregate_ms>
 function interval(){
     for(var emotion in aggregate){
-        aggregate[emotion] = aggregate[emotion]/seconds;
+        aggregate[emotion] = aggregate[emotion]/times_collected;
     }
-    var video_id = $('#player').data('video-id');
-    // var ytplayer = document.getElementById('player_uid_' + video_id);
+    times_collected = 0;
     if(player === null)
         return;
     aggregate['timestamp'] = player.getCurrentTime();
     console.log(JSON.stringify(aggregate));
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/test",
-    //     // The key needs to match your method's input parameter (case-sensitive).
-    //     data: JSON.stringify(aggregate),
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     success: function(data){
-    //         debugger;
-    //         console.log("sent data!");
-    //
-    //         // window.location.href = data.url;
-    //     },
-    //     failure: function(errMsg) {
-    //         alert(errMsg);
-    //     }
-    // });
+    data_arr.push(aggregate);
     aggregate = {
         joy:0,
         sadness:0,
@@ -147,6 +160,27 @@ function interval(){
         valence:0,
         engagement:0
     };
+}
+
+// ajax call to send data to server every <server_ms>
+function pushData(){
+    $.ajax({
+        type: "POST",
+        url: "/test",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(data_arr),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(data){
+            debugger;
+            console.log("sent data!");
+            data_arr = [];
+            // window.location.href = data.url;
+        },
+        failure: function(errMsg) {
+            alert(errMsg);
+        }
+    });
 }
 
 // timer function to allow for easier pause/resume of setInterval callback
@@ -177,6 +211,10 @@ function IntervalTimer(callback, interval) {
         startTime = new Date();
         timerId = window.setInterval(callback, interval);
         state = 1;
+    };
+
+    this.stop = function() {
+        window.clearInterval(timerId);
     };
 
     startTime = new Date();
