@@ -1,6 +1,14 @@
 package emotrace.controllers;
 
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.google.appengine.labs.repackaged.org.json.JSONString;
+import com.google.appengine.repackaged.com.google.gson.Gson;
+import com.google.appengine.repackaged.com.google.gson.JsonElement;
+import com.google.appengine.repackaged.org.codehaus.jackson.map.ObjectMapper;
 import emotrace.models.DisplayVideo;
+import emotrace.models.RawEmotion;
 import emotrace.models.Video;
 import emotrace.services.LoginService;
 import org.springframework.http.HttpStatus;
@@ -10,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Created by nashahzad on 4/3/2017.
@@ -94,5 +103,45 @@ public class VideoController {
     @ResponseStatus(HttpStatus.OK)
     public void delete_video(@ModelAttribute Video video) {
         video.delete();
+    }
+
+    /**
+     * Stores aggregate emotion data for video
+     */
+    @RequestMapping(value="/forms/store_emotion_data", method=RequestMethod.POST)
+    public String store_emotion_data(Long video_id, JSONArray arr) {
+            for(int i = 0; i < arr.length(); i++){
+                RawEmotion emotion = null;
+                try {
+                    JSONObject jsonObject = (JSONObject) arr.get(i);
+                    Gson gson = new Gson();
+                    emotion = gson.fromJson(jsonObject.toString(), RawEmotion.class);
+                    emotion.video = Video.getKey(video_id);
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+                RawEmotion current_data = RawEmotion.get_raw_emotion_by_video_timestamp(emotion.video, emotion.timestamp);
+                if(current_data != null){
+                    // aggregate values
+                    current_data.anger += emotion.anger;
+                    current_data.joy += emotion.joy;
+                    current_data.sadness += emotion.sadness;
+                    current_data.disgust += emotion.disgust;
+                    current_data.contempt += emotion.contempt;
+                    current_data.fear += emotion.fear;
+                    current_data.surprise += emotion.surprise;
+                    current_data.valence += emotion.valence;
+                    current_data.engagement += emotion.engagement;
+
+                    // update on DataStore
+                    current_data.create();
+                } else{
+                    emotion.create();
+                }
+            }
+
+
+        return null;
     }
 }
