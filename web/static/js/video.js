@@ -164,23 +164,23 @@ function interval(){
 
 // ajax call to send data to server every <server_ms>
 function pushData(){
-    $.ajax({
-        type: "POST",
-        url: "/test",
-        // The key needs to match your method's input parameter (case-sensitive).
-        data: JSON.stringify(data_arr),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(data){
-            debugger;
-            console.log("sent data!");
-            data_arr = [];
-            // window.location.href = data.url;
-        },
-        failure: function(errMsg) {
-            alert(errMsg);
-        }
-    });
+    // $.ajax({
+    //     type: "POST",
+    //     url: "/test",
+    //     // The key needs to match your method's input parameter (case-sensitive).
+    //     data: JSON.stringify(data_arr),
+    //     contentType: "application/json; charset=utf-8",
+    //     dataType: "json",
+    //     success: function(data){
+    //         debugger;
+    //         console.log("sent data!");
+    //         data_arr = [];
+    //         // window.location.href = data.url;
+    //     },
+    //     failure: function(errMsg) {
+    //         alert(errMsg);
+    //     }
+    // });
 }
 
 // timer function to allow for easier pause/resume of setInterval callback
