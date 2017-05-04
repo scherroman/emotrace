@@ -134,6 +134,11 @@
 
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
+        <url-pattern>/loginreturn</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
