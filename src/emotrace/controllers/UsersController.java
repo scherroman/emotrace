@@ -33,7 +33,6 @@ public class UsersController {
     
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)
     public String scroll_users(@RequestParam("offset") int offset, Model model) {
-        offset = offset * NUM_USERS_PER_PAGE;
         List<User> users = User.scroll_users(NUM_USERS_PER_PAGE, offset);
 
         model.addAttribute("users", users);
