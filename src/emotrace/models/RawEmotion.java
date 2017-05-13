@@ -9,10 +9,14 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 
 import java.lang.String;
+import java.util.Date;
+import java.util.List;
+
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Entity
 public class RawEmotion {
-  @Index Key<Video> video;
+  @Index public Key<Video> video;
 
   @Id public Long id;
   @Index public double timestamp;
@@ -25,12 +29,26 @@ public class RawEmotion {
   public int surprise;
   public int valence;
   public int engagement;
-  public String emoji;
 
   public RawEmotion () {}
 
-  public RawEmotion(Long video_id, Long id, double timestamp, int joy, int sadness, int disgust, int contempt,
-                    int anger, int fear, int surprise, int valence, int engagement, String emoji) {
+  public RawEmotion(double timestamp, int joy, int sadness, int disgust, int contempt,
+                    int anger, int fear, int surprise, int valence, int engagement) {
+      this.id = id;
+      this.timestamp = timestamp;
+      this.joy = joy;
+      this.sadness = sadness;
+      this.disgust = disgust;
+      this.contempt = contempt;
+      this.anger = anger;
+      this.fear = fear;
+      this.surprise = surprise;
+      this.valence = valence;
+      this.engagement = engagement;
+  }
+
+  public RawEmotion(Long video_id, double timestamp, int joy, int sadness, int disgust, int contempt,
+                    int anger, int fear, int surprise, int valence, int engagement) {
   	this.video = Video.getKey(video_id);
     this.id = id;
     this.timestamp = timestamp;
@@ -43,6 +61,22 @@ public class RawEmotion {
     this.surprise = surprise;
     this.valence = valence;
     this.engagement = engagement;
-    this.emoji = emoji;
   }
+
+  /**
+   * Retrieves a list of channels by owner, sorted by name
+   * @param video Video to use to query for RawEmotion data
+   * @param timestamp Timestamp to use to query for RawEmotion data
+   */
+  public static RawEmotion get_raw_emotion_by_video_timestamp(Key<Video> video, double timestamp) {
+    return ofy().load().type(RawEmotion.class).filter("video", video).filter("timestamp", timestamp).first().now();
+  }
+
+  /***
+   * Creates this channel
+   * */
+  public Key<RawEmotion> create() {
+      return ofy().save().entity(this).now();
+  }
+
 }

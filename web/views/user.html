@@ -6,7 +6,7 @@
         <div layout:fragment="content">
             <div class="row">
                 <div class="col-xs-12 text-center page-title">
-                    <h2 th:text="${user_id} + '\'s channels'"></h2>
+                    <h2 th:text="${user.getNickName()} + '\'s channels'"></h2>
                 </div>
             </div>
             <div id="channels" class="row loads-more-content">
@@ -28,8 +28,8 @@
                 <div layout:replace="fragments/modal :: modal(id='create-channel-modal', submit_button_id='create-channel-submit')">
                     <div layout:fragment="modal-content">
                         <form id="create-channel-form" th:action="@{~/channel/forms/create_editable}" th:object="${form_channel}" method="POST"
-                          th:attr="data-user-id=${user_id}, data-form-title='Create Channel'">
-                            <input type="hidden" th:value="${user_id}" name="owner" />
+                          th:attr="data-form-title='Create Channel'">
+                            <input type="hidden" th:value="${user.googleID}" name="owner" />
                             <input class="form-control name-field focus-field" type="text" placeholder="Name" th:field="*{name}" />
                             <textarea class="form-control" rows="3" placeholder="Description" th:field="*{description}"></textarea>
                         </form>
@@ -39,7 +39,7 @@
                 <div layout:replace="fragments/modal :: modal(id='edit-channel-modal', submit_button_id='edit-channel-submit')">
                     <div layout:fragment="modal-content">
                         <form id="edit-channel-form" th:action="@{~/channel/forms/edit_channel}" th:object="${form_channel}" method="POST"
-                              th:attr="data-user-id=${user_id}, data-form-title='Edit Channel'">
+                              th:attr="data-form-title='Edit Channel'">
                             <input type="hidden" name="id" id="channel_id" th:field="*{id}" />
                             <input class="form-control name-field focus-field" type="text" placeholder="Name" th:field="*{name}" />
                             <textarea class="form-control" rows="3" placeholder="Description" th:field="*{description}"></textarea>

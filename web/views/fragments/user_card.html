@@ -1,0 +1,9 @@
+<div th:id="'card-container-' + ${user.id}" class="card-container col-ms-6 col-sm-4 col-md-3" layout:fragment="user_card(link, title)">
+    <div class="panel thumbnail card user-card">
+        <div class="caption">
+            <a class="card-link" th:href="@{~/user/} + ${user.googleID}">
+                <h4 class="card-title text-card-title" th:text="${user.nickName}">Card Name</h4>
+            </a>
+        </div>
+    </div>
+</div>
