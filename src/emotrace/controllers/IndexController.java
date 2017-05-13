@@ -16,12 +16,15 @@ import java.util.List;
 
 /**
  * Created by romanscher on 4/1/17.
+ * Root route: /
  */
 @Controller
 public class IndexController {
 
-    // EXTERNAL ROUTES
-
+    /**
+     * Serves the videos page as the default root page of the site
+     * @return Returns the videos page
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index(){
         return new ModelAndView("redirect:/videos");

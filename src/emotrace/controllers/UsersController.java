@@ -12,15 +12,18 @@ import java.util.List;
 
 /**
  * Created by romanscher on 4/6/17.
+ * Root route: /users/*
  */
 @Controller
 public class UsersController {
 
-    // EXTERNAL ROUTES
-
     public static final int NUM_USERS_PER_PAGE = 16;
 
-    //SERVES A PAGE DISPLAYING ALL DIFFERENT USERS ON SITE
+    /**
+     * Serves a page showing all the users on the site, initially showing 16 at most
+     * @param model Model of the page
+     * @return Returns a users page
+     */
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public String users(Model model){
         List<User> users = User.scroll_users(NUM_USERS_PER_PAGE, 0);
@@ -30,7 +33,13 @@ public class UsersController {
 
         return "users";
     }
-    
+
+    /**
+     * Helps with scrolling the page and displaying more user cards
+     * @param offset Offset of the user cards
+     * @param model Model of the page
+     * @return Returns user card fragment
+     */
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)
     public String scroll_users(@RequestParam("offset") int offset, Model model) {
         offset = offset * NUM_USERS_PER_PAGE;

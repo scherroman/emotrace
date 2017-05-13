@@ -12,15 +12,18 @@ import java.util.List;
 
 /**
  * Created by romanscher on 4/1/17.
+ * Root route: /channels/*
  */
 @Controller
 public class ChannelsController {
 
     public static final int NUM_CHANNELS_PER_PAGE = 16;
 
-    // EXTERNAL ROUTES
-
-    //SERVES A PAGE DISPLAYING ALL CHANNELS ON SITE
+    /**
+     * Serves page displaying the channels on the site
+     * @param model Model of the page
+     * @return Returns page displaying the channels
+     */
     @RequestMapping(value = "channels", method = RequestMethod.GET)
     public String channels(Model model){
         List<Channel> channels = Channel.scroll_channels(NUM_CHANNELS_PER_PAGE, 0);
@@ -31,6 +34,12 @@ public class ChannelsController {
         return "channels";
     }
 
+    /**
+     * Method for displaying more channel cards correctly on the page
+     * @param offset Offset of channel cards
+     * @param model Model of the page
+     * @return Channel card fragment
+     */
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)
     public String scroll_channels(@RequestParam("offset") int offset, Model model) {
         offset = offset * NUM_CHANNELS_PER_PAGE;

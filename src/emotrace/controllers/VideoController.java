@@ -19,11 +19,10 @@ import java.util.Iterator;
 
 /**
  * Created by nashahzad on 4/3/2017.
+ * Root route: /video/*
  */
 @Controller
 public class VideoController {
-
-    // EXTERNAL ROUTES
 
     /**
      * Renders the page for a video
@@ -41,8 +40,6 @@ public class VideoController {
         return "video";
     }
 
-    // MODEL ATTRIBUTES
-
     /**
      * A Video ModelAttribute which returns a Video from a channel_id
      * IS CALLED EVERY TIME A REQUEST IS MADE FOR *ANY* @RequestMapping...
@@ -57,8 +54,6 @@ public class VideoController {
 
         return new Video(channelId, externalId);
     }
-
-    // INTERNAL ROUTES
 
     /**
      * Creates a new video

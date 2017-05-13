@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by nashahzad on 4/5/17.
+ * Root route: /channel/*
  */
 @Controller
 public class ChannelController {
@@ -43,7 +44,14 @@ public class ChannelController {
 
         return "channel";
     }
-    
+
+    /**
+     * For scrolling through videos on channel
+     * @param channel_id Channel id of the specific channel
+     * @param offset offset of videos on page
+     * @param model Model of the page
+     * @return Return video card fragment
+     */
     @RequestMapping(value = "/{channel_id}/videos_scroll", method = RequestMethod.GET)
     public String scroll_channels(@PathVariable("channel_id") String channel_id,
                                   @RequestParam("offset") int offset, Model model) {
