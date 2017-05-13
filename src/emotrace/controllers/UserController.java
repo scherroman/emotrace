@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by nashahzad on 4/4/17.
+ * Root route: /user/*
  */
 @Controller
 public class UserController {
@@ -21,7 +22,12 @@ public class UserController {
 
     // EXTERNAL ROUTES
 
-    //SERVES A PAGE DISPLAYING ALL CHANNELS ASSOCIATED WITH A SPECIFIC USER
+    /**
+     * Serves a page displaying all the channels for a specific user
+     * @param user_id id of the specific user
+     * @param model Model of the page
+     * @return returns page of the specific user
+     */
     @RequestMapping(value = "/{user_id}", method = RequestMethod.GET)
     public String user(@PathVariable("user_id") String user_id, Model model){
         List<Channel> channels = Channel.get_channels_by_owner(user_id, NUM_CHANNELS_PER_PAGE, 0);
@@ -35,6 +41,13 @@ public class UserController {
         return "user";
     }
 
+    /**
+     * Helps with scrolling down the page and displaying more channel cards for user's channels
+     * @param user_id id of the specific user
+     * @param offset offset of the channel cards
+     * @param model Model of the page
+     * @return returns the channel card fragment
+     */
     @RequestMapping(value = "/{user_id}/channels_scroll", method = RequestMethod.GET)
     public String scroll_channels(@PathVariable("user_id") String user_id,
                                   @RequestParam("offset") int offset, Model model) {
