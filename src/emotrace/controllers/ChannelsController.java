@@ -42,7 +42,6 @@ public class ChannelsController {
      */
     @RequestMapping(value = "/scroll", method = RequestMethod.GET)
     public String scroll_channels(@RequestParam("offset") int offset, Model model) {
-        offset = offset * NUM_CHANNELS_PER_PAGE;
         List<Channel> channels = Channel.scroll_channels(NUM_CHANNELS_PER_PAGE, offset);
 
         model.addAttribute("channels", channels);

@@ -20,7 +20,7 @@
                 </th:block>
             </div>
 
-            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/user/} + ${user_id} + @{/channels_scroll})"></th:block>
+            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/user/} + ${user.googleID} + @{/channels_scroll})"></th:block>
 
             <th:block th:if="${is_owner}">
                 <th:block layout:replace="fragments/add_button :: add_button(target='#create-channel-modal')"></th:block>

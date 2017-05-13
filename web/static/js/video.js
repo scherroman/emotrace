@@ -1,5 +1,7 @@
 /**
  * Created by romanscher on 5/3/17.
+ *
+ * JS for controlling video pages
  */
 
 // ytplayer
