@@ -22,6 +22,9 @@ public class IndexController {
 
     // EXTERNAL ROUTES
 
+    /**
+     * Reroutes user to /videos page
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index(){
         return new ModelAndView("redirect:/videos");

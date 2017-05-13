@@ -38,7 +38,6 @@ public class UserController {
     @RequestMapping(value = "/{user_id}/channels_scroll", method = RequestMethod.GET)
     public String scroll_channels(@PathVariable("user_id") String user_id,
                                   @RequestParam("offset") int offset, Model model) {
-        offset = offset * NUM_CHANNELS_PER_PAGE;
         List<Channel> channels = Channel.get_channels_by_owner(user_id, NUM_CHANNELS_PER_PAGE, offset);
 
         model.addAttribute("channels", channels);

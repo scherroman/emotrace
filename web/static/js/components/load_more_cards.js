@@ -1,14 +1,21 @@
 /**
  * Created by romanscher on 4/20/17.
+ *
+ * A generalized, reusable handler for loading more cards onto a page.
+ *
+ * Requires a button '#load-more',
+ * and a div '.loads-more-content' to load the new cards into.
  */
 $( document ).ready(function() {
     // Load More
-    $(document).on('click', '#load_more', function() {
+    $(document).on('click', '#load-more', function() {
         var load_more_button = $(this);
         var content = $('.loads-more-content');
         var url = $(this).data('url');
         url += "?offset=" + content.find(".card").length;
 
+        // Retrieve the next cards server-side,
+        // Returns: Next rendered video cards to add to the page
         $.ajax({
             url: url,
             type: 'GET',

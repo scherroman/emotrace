@@ -47,13 +47,12 @@ public class ChannelController {
     @RequestMapping(value = "/{channel_id}/videos_scroll", method = RequestMethod.GET)
     public String scroll_channels(@PathVariable("channel_id") String channel_id,
                                   @RequestParam("offset") int offset, Model model) {
-        offset = offset * NUM_VIDEOS_PER_PAGE;
         Channel channel = Channel.get_channel_by_id(channel_id);
         List<Video> videos = Video.get_videos_by_channel_id(channel_id, NUM_VIDEOS_PER_PAGE, offset);
         List<DisplayVideo> display_videos = DisplayVideo.display_videos_from_videos(videos);
         DisplayVideo.add_info_from_youtube(display_videos);
 
-        model.addAttribute("channels", display_videos);
+        model.addAttribute("videos", display_videos);
 
         if (LoginService.is_current_user(channel.owner)) {
             return "fragment_collections/video_cards_editable";
