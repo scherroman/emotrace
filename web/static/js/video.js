@@ -148,8 +148,8 @@ function interval(){
     times_collected = 0;
     if(player === null)
         return;
-    aggregate['timestamp'] = player.getCurrentTime();
-    console.log(JSON.stringify(aggregate));
+    aggregate['timestamp'] = Math.floor(player.getCurrentTime());
+    // console.log(JSON.stringify(aggregate));
     data_arr.push(aggregate);
     aggregate = {
         joy:0,
