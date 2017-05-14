@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
 /**
  * Created by nashahzad on 4/3/2017.
@@ -103,68 +102,24 @@ public class VideoController {
     }
 
     /**
-     * Stores aggregate emotion data for video
+     * Stores aggregate emotion data for video_id @ timestamp
      */
     @RequestMapping(value="/forms/store_emotion_data", method=RequestMethod.POST)
-    public String store_emotion_data(@RequestBody String s) throws JSONException {
+    @ResponseStatus(HttpStatus.OK)
+    public void store_emotion_data(@RequestBody String s) throws JSONException {
             JSONObject data_from_client = new JSONObject(s);
             String video_id = data_from_client.getString("video_id");
             JSONArray arr = new JSONArray(data_from_client.getString("aggregates"));
-            int anger, joy, sadness, disgust, contempt, fear, surprise, valence, engagement;
-            anger = joy = sadness = disgust = contempt = fear = surprise = valence = engagement = 0;
-            int numCollections = arr.length();
             for(int i = 0; i < arr.length(); i++){
                 JSONObject json = arr.getJSONObject(i);
-//                anger += json.getLong("anger");
-//                joy += json.getLong("joy");
-//                sadness += json.getLong("sadness");
-//                disgust += json.getLong("disgust");
-//                contempt += json.getLong("contempt");
-//                fear += json.getLong("fear");
-//                surprise += json.getLong("surprise");
-//                valence += json.getLong("valence");
-//                engagement += json.getLong("engagement");
-                RawEmotion emotion = null;
-//                try {
-//                JSONObject json = (JSONObject) arr.get(i);
                 Gson gson = new Gson();
-                emotion = gson.fromJson(json.toString(), RawEmotion.class);
-                emotion.video = video_id;
-//                emotion.video = Video.getKey(video_id);
-//                }
-//                catch (JSONException e){
-//                    e.printStackTrace();
-//                }
-                RawEmotion current_data = RawEmotion.get_raw_emotion_by_video_timestamp(emotion.video, emotion.timestamp);
-                if(current_data != null){
-                    // aggregate values
-                    current_data.anger += emotion.anger;
-                    current_data.joy += emotion.joy;
-                    current_data.sadness += emotion.sadness;
-                    current_data.disgust += emotion.disgust;
-                    current_data.contempt += emotion.contempt;
-                    current_data.fear += emotion.fear;
-                    current_data.surprise += emotion.surprise;
-                    current_data.valence += emotion.valence;
-                    current_data.engagement += emotion.engagement;
-
-                    // update on DataStore
-                    current_data.create();
-                } else{
-                    emotion.create();
-                }
+                RawEmotion new_emo = gson.fromJson(json.toString(), RawEmotion.class);
+                new_emo.video_id = video_id;
+                new_emo.times_seen = 1;
+                RawEmotion prev_emo = RawEmotion.get_raw_emotion_by_video_timestamp(new_emo.video_id, new_emo.timestamp);
+                if (prev_emo != null)
+                    RawEmotion.update_values(prev_emo, new_emo);
+                new_emo.create();
             }
-//            anger = anger/numCollections;
-//            sadness = sadness/numCollections;
-//            disgust = disgust/numCollections;
-//            contempt = contempt/numCollections;
-//            fear = fear/numCollections;
-//            surprise = surprise/numCollections;
-//            valence = valence/numCollections;
-//            engagement = engagement/numCollections;
-//
-//
-
-            return null;
     }
 }
