@@ -106,18 +106,35 @@ public class VideoController {
      * Stores aggregate emotion data for video
      */
     @RequestMapping(value="/forms/store_emotion_data", method=RequestMethod.POST)
-    public String store_emotion_data(Long video_id, JSONArray arr) {
+    public String store_emotion_data(@RequestBody String s) throws JSONException {
+            JSONObject data_from_client = new JSONObject(s);
+            String video_id = data_from_client.getString("video_id");
+            JSONArray arr = new JSONArray(data_from_client.getString("aggregates"));
+            int anger, joy, sadness, disgust, contempt, fear, surprise, valence, engagement;
+            anger = joy = sadness = disgust = contempt = fear = surprise = valence = engagement = 0;
+            int numCollections = arr.length();
             for(int i = 0; i < arr.length(); i++){
+                JSONObject json = arr.getJSONObject(i);
+//                anger += json.getLong("anger");
+//                joy += json.getLong("joy");
+//                sadness += json.getLong("sadness");
+//                disgust += json.getLong("disgust");
+//                contempt += json.getLong("contempt");
+//                fear += json.getLong("fear");
+//                surprise += json.getLong("surprise");
+//                valence += json.getLong("valence");
+//                engagement += json.getLong("engagement");
                 RawEmotion emotion = null;
-                try {
-                    JSONObject jsonObject = (JSONObject) arr.get(i);
-                    Gson gson = new Gson();
-                    emotion = gson.fromJson(jsonObject.toString(), RawEmotion.class);
-                    emotion.video = Video.getKey(video_id);
-                }
-                catch (JSONException e){
-                    e.printStackTrace();
-                }
+//                try {
+//                JSONObject json = (JSONObject) arr.get(i);
+                Gson gson = new Gson();
+                emotion = gson.fromJson(json.toString(), RawEmotion.class);
+                emotion.video = video_id;
+//                emotion.video = Video.getKey(video_id);
+//                }
+//                catch (JSONException e){
+//                    e.printStackTrace();
+//                }
                 RawEmotion current_data = RawEmotion.get_raw_emotion_by_video_timestamp(emotion.video, emotion.timestamp);
                 if(current_data != null){
                     // aggregate values
@@ -137,8 +154,17 @@ public class VideoController {
                     emotion.create();
                 }
             }
+//            anger = anger/numCollections;
+//            sadness = sadness/numCollections;
+//            disgust = disgust/numCollections;
+//            contempt = contempt/numCollections;
+//            fear = fear/numCollections;
+//            surprise = surprise/numCollections;
+//            valence = valence/numCollections;
+//            engagement = engagement/numCollections;
+//
+//
 
-
-        return null;
+            return null;
     }
 }
