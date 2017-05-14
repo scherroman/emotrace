@@ -21,7 +21,8 @@
                     <a th:href="@{~/channel/} + ${video.channel.id}" href="javascript:void(0)">
                         <h4 th:text="${video.channel.name}"></h4>
                     </a>
-                    <a id="load-emotion-trace" href="javascript:void(0)" class="btn btn-raised btn-primary">
+                    <a id="load-emotion-trace" href="javascript:void(0)" th:attr="data-url=@{~/video/forms/retrieve_raw_emotions/} + ${video.video.externalId}"
+                       class="btn btn-raised btn-primary">
                         Load Emotion Trace
                     </a>
                     <div id="emotrace-plots" class="col-xs-12" style="height:525px;"></div>

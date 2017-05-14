@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by nashahzad on 4/3/2017.
@@ -116,5 +117,24 @@ public class VideoController {
                     RawEmotion.update_values(prev_emo, new_emo);
                 new_emo.create();
             }
+    }
+
+    /**
+     * Retrieves all raw emotion data for a video
+     * @return json containing an array of the raw emotion data
+     */
+    @RequestMapping(value= "/forms/retrieve_raw_emotions/{video_id}", method=RequestMethod.GET)
+    @ResponseBody
+    public String retrieve_raw_emotions(@PathVariable("video_id") String video_id, Model model) throws JSONException {
+        Gson gson = new Gson();
+        JSONObject response_json = new JSONObject();
+        List<RawEmotion> raw_emotions = RawEmotion.get_raw_emotions_by_video_id(video_id);
+        String raw_emotions_json_string = gson.toJson(raw_emotions);
+
+        response_json.put("video_id", video_id);
+        response_json.put("raw_emotions", raw_emotions_json_string);
+        String response_json_string = response_json.toString();
+
+        return response_json_string;
     }
 }

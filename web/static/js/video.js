@@ -97,7 +97,6 @@ $(document).ready(function() {
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
         detector.detectAllEmotions();
-        onStart();
         detector.addEventListener("onWebcamConnectSuccess", onWebcamConnectSuccess(event));
         detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
             if(isCollecting && faces[0] != null){
@@ -115,6 +114,7 @@ $(document).ready(function() {
             }
 
         });
+        onStart();
     }
 
     // 5. The API calls this function when the player's state changes.
