@@ -4,6 +4,16 @@
  * JS for controlling video pages
  */
 
+$( document ).ready(function() {
+
+    /* REUSABLE HANDLERS */
+
+    /* NONREUSABLE HANDLERS */
+
+    // Load emotion trace plots handler
+    $.getScript("/static/js/emotrace-plots.js", function(){});
+});
+
 // ytplayer
 var player = null;
 
