@@ -4,6 +4,16 @@
  * JS for controlling video pages
  */
 
+$( document ).ready(function() {
+
+    /* REUSABLE HANDLERS */
+
+    /* NONREUSABLE HANDLERS */
+
+    // Load emotion trace plots handler
+    $.getScript("/static/js/emotrace-plots.js", function(){});
+});
+
 // ytplayer
 var player = null;
 
@@ -87,10 +97,9 @@ $(document).ready(function() {
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
         detector.detectAllEmotions();
-        onStart();
         detector.addEventListener("onWebcamConnectSuccess", onWebcamConnectSuccess(event));
         detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
-            if(isCollecting){
+            if(isCollecting && faces[0] != null){
                 //aggregate data
                 times_collected++;
                 aggregate['joy'] += faces[0].emotions.joy;
@@ -105,6 +114,7 @@ $(document).ready(function() {
             }
 
         });
+        onStart();
     }
 
     // 5. The API calls this function when the player's state changes.
@@ -144,13 +154,14 @@ function onWebcamConnectSuccess(event) {
 // function that makes ajax call to server and resets data aggregation every <aggregate_ms>
 function interval(){
     for(var emotion in aggregate){
-        aggregate[emotion] = aggregate[emotion]/times_collected;
+        if(times_collected != 0)
+            aggregate[emotion] = aggregate[emotion]/times_collected;
     }
     times_collected = 0;
     if(player === null)
         return;
-    aggregate['timestamp'] = player.getCurrentTime();
-    console.log(JSON.stringify(aggregate));
+    aggregate['timestamp'] = Math.floor(player.getCurrentTime());
+    // console.log(JSON.stringify(aggregate));
     data_arr.push(aggregate);
     aggregate = {
         joy:0,
@@ -167,23 +178,28 @@ function interval(){
 
 // ajax call to send data to server every <server_ms>
 function pushData(){
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/test",
-    //     // The key needs to match your method's input parameter (case-sensitive).
-    //     data: JSON.stringify(data_arr),
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     success: function(data){
-    //         debugger;
-    //         console.log("sent data!");
-    //         data_arr = [];
-    //         // window.location.href = data.url;
-    //     },
-    //     failure: function(errMsg) {
-    //         alert(errMsg);
-    //     }
-    // });
+    var data_to_send = {
+        video_id: $('#player').data('video-id'),
+        aggregates: data_arr
+    };
+    $.ajax({
+        type: "POST",
+        url: "/video/forms/store_emotion_data",
+        // The key needs to match your method's input parameter (case-sensitive).
+        data: JSON.stringify(data_to_send),
+        contentType: "application/json; charset=utf-8",
+        accept: "application/json",
+        dataType: "json",
+        success: function(data){
+            debugger;
+            console.log("sent data!");
+            data_arr = [];
+            // window.location.href = data.url;
+        },
+        failure: function(errMsg) {
+            alert(errMsg);
+        }
+    });
 }
 
 // timer function to allow for easier pause/resume of setInterval callback
