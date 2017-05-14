@@ -16,7 +16,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Entity
 public class RawEmotion {
-  @Index public Key<Video> video;
+  @Index public String video;
 
   @Id public Long id;
   @Index public double timestamp;
@@ -47,9 +47,9 @@ public class RawEmotion {
       this.engagement = engagement;
   }
 
-  public RawEmotion(Long video_id, double timestamp, int joy, int sadness, int disgust, int contempt,
+  public RawEmotion(String video_id, double timestamp, int joy, int sadness, int disgust, int contempt,
                     int anger, int fear, int surprise, int valence, int engagement) {
-  	this.video = Video.getKey(video_id);
+  	this.video = video_id;
     this.id = id;
     this.timestamp = timestamp;
     this.joy = joy;
@@ -68,7 +68,7 @@ public class RawEmotion {
    * @param video Video to use to query for RawEmotion data
    * @param timestamp Timestamp to use to query for RawEmotion data
    */
-  public static RawEmotion get_raw_emotion_by_video_timestamp(Key<Video> video, double timestamp) {
+  public static RawEmotion get_raw_emotion_by_video_timestamp(String video, double timestamp) {
     return ofy().load().type(RawEmotion.class).filter("video", video).filter("timestamp", timestamp).first().now();
   }
 
