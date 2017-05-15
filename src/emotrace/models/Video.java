@@ -120,6 +120,13 @@ public class Video {
     }
 
     /**
+     * Saves changes to this channel
+     */
+    public Key<Video> save() {
+        return ofy().save().entity(this).now();
+    }
+
+    /**
      * Deletes this video
      */
     public void delete() {
