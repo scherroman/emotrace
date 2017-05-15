@@ -31,6 +31,11 @@ public class VideoController {
     @RequestMapping(value = "/{video_id}", method = RequestMethod.GET)
     public String video(@PathVariable("video_id") String video_id, Model model) {
         Video video = Video.get_video_by_id(video_id);
+
+        // Increment the view count for the video
+        video.numViews++;
+        video.save();
+
         DisplayVideo display_video = DisplayVideo.display_video_from_video(video);
         DisplayVideo.add_info_from_youtube(new ArrayList<>(Arrays.asList(display_video)));
 

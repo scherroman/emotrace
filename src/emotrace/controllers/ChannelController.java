@@ -109,15 +109,6 @@ public class ChannelController {
     }
 
     /**
-     * Updates the information for a channel
-     * @return HttpStatus.OK
-     */
-    @RequestMapping(value = "/forms/rename", method = RequestMethod.POST)
-    public String rename_channel() {
-        return "";
-    }
-
-    /**
      * Updates Channel name and description in datastore
      * @param channel Channel object with info to put into datastore
      * @param model Model object of the page
@@ -128,7 +119,7 @@ public class ChannelController {
         Channel toChange = Channel.get_channel_by_id(channel.getId());
         toChange.setName(channel.getName());
         toChange.setDescription(channel.getDescription());
-        toChange.create();
+        toChange.save();
 
         model.addAttribute("channel", channel);
 

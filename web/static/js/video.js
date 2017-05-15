@@ -30,7 +30,7 @@ var isCollecting = false;
 var aggregate_ms = 1000;
 
 // How often to send data to server
-var server_ms = 60000;
+var server_ms = 10000;
 
 // number of times data was collected
 var times_collected = 0;
@@ -178,6 +178,7 @@ function interval(){
 
 // ajax call to send data to server every <server_ms>
 function pushData(){
+    console.log("Sending emotion data...");
     var data_to_send = {
         video_id: $('#player').data('video-id'),
         aggregates: data_arr
@@ -188,15 +189,12 @@ function pushData(){
         // The key needs to match your method's input parameter (case-sensitive).
         data: JSON.stringify(data_to_send),
         contentType: "application/json; charset=utf-8",
-        accept: "application/json",
-        dataType: "json",
         success: function(data){
-            debugger;
-            console.log("sent data!");
+            console.log("Emotion data sent successfully.");
             data_arr = [];
-            // window.location.href = data.url;
         },
         failure: function(errMsg) {
+            console.log(errMsg)
             alert(errMsg);
         }
     });

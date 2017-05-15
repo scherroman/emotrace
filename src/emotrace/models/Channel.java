@@ -118,6 +118,13 @@ public class Channel {
     }
 
     /**
+     * Saves changes to this channel
+     */
+    public Key<Channel> save() {
+        return ofy().save().entity(this).now();
+    }
+
+    /**
      * Deletes this channel, and all videos under it
      */
     public void delete() {
