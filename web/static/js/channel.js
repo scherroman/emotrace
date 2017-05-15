@@ -20,9 +20,13 @@ $( document ).ready(function() {
 
     // Add video to channel handler
     $(document).on('click', '#add-video-submit', function() {
+        // Disable button until ajax completes
+        $("#add-video-submit").attr("disabled", true);
+
         var add_video_form = $('#add-video-form');
         var content = $('.loads-more-content');
         var url = add_video_form.find('input[name="url"]').val();
+        var empty_message = $('#empty-message');
 
         // Parse the video id from nearly all types of YouTube urls.
         // Regex from http://stackoverflow.com/q/10591547/4155686
@@ -43,12 +47,16 @@ $( document ).ready(function() {
             type: 'POST',
             success: function(response) {
                 content.prepend(response);
+                empty_message.hide();
             },
             error: function(error) {
                 console.log(error);
                 alert(error.statusText)
             },
             complete: function(data) {
+                //Renable button
+                $("#add-video-submit").attr("disabled", false);
+
                 $('#add-video-modal').modal('toggle');
             }
         });

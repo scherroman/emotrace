@@ -20,8 +20,12 @@ $( document ).ready(function() {
 
     // Create channel handler
     $(document).on('click', '#create-channel-submit', function() {
+        // Disable button until ajax completes
+        $("#create-channel-submit").attr("disabled", true);
+
         var create_channel_form = $('#create-channel-form');
         var content = $('.loads-more-content');
+        var empty_message = $('#empty-message');
 
         // Create the channel server-side,
         // Returns: A new rendered channel card to add to the page
@@ -31,12 +35,16 @@ $( document ).ready(function() {
             type: 'POST',
             success: function(response) {
                 content.prepend(response);
+                empty_message.hide();
             },
             error: function(error) {
                 console.log(error);
                 alert(error.statusText)
             },
             complete: function(data) {
+                //Renable button
+                $("#create-channel-submit").attr("disabled", false);
+
                 $('#create-channel-modal').modal('toggle');
             }
         });
@@ -44,6 +52,9 @@ $( document ).ready(function() {
 
     // Edit channel handler
     $(document).on('click', '#edit-channel-submit', function() {
+        // Disable button until ajax completes
+        $("#edit-channel-submit").attr("disabled", true);
+
         var edit_channel_form = $('#edit-channel-form');
         var channel_id = edit_channel_form.find('input[name="id"]').val();
         var channel_card = $('#card-container-' + channel_id);
@@ -62,6 +73,9 @@ $( document ).ready(function() {
                 alert(error);
             },
             complete: function(data) {
+                //Renable button
+                $("#edit-channel-submit").attr("disabled", false);
+
                 $('#edit-channel-modal').modal('toggle');
             }
         });

@@ -25,9 +25,16 @@
                         <th:block layout:replace="fragment_collections/video_cards :: video_cards(videos=${videos})"></th:block>
                     </th:block>
                 </th:block>
+                <th:block th:if="${videos.empty}">
+                    <div id="empty-message" class="text-center faded-message">
+                        <h4>Nothing to see here. Add some videos!</h4>
+                    </div>
+                </th:block>
             </div>
 
-            <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/channel/} + ${channel.id} + @{/videos_scroll})"></th:block>
+            <th:block th:if="${!videos.empty}">
+                <th:block layout:replace="fragments/load_more_button :: load_more_button(url=@{~/channel/} + ${channel.id} + @{/videos_scroll})"></th:block>
+            </th:block>
 
             <th:block th:if="${is_owner}">
                 <th:block layout:replace="fragments/add_button :: add_button(target='#add-video-modal')"></th:block>

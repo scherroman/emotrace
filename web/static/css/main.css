@@ -19,6 +19,10 @@ a {
     margin-bottom: 25px;
 }
 
+.faded-message {
+    color: #b0b0b0;
+}
+
 /* action buttons */
 
 .main-fab {
