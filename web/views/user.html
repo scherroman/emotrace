@@ -20,7 +20,12 @@
                 </th:block>
                 <th:block th:if="${channels.empty}">
                     <div id="empty-message" class="text-center faded-message">
-                        <h4>Nothing to see here. Try creating a channel!</h4>
+                        <th:block th:if="${is_owner}">
+                            <h4>Nothing to see here. Try creating a channel!</h4>
+                        </th:block>
+                        <th:block th:if="${!is_owner}">
+                            <h4>Nothing to see here.</h4>
+                        </th:block>
                     </div>
                 </th:block>
             </div>
