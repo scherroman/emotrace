@@ -48,48 +48,46 @@ $(document).ready(function() {
             success: function(response) {
                 var raw_emotions = JSON.parse(response.raw_emotions);
 
-                if (raw_emotions.length > 0) {
-                    raw_emotions.sort(function(a, b) {
-                        return a.timestamp - b.timestamp;
-                    });
+                raw_emotions.sort(function(a, b) {
+                    return a.timestamp - b.timestamp;
+                });
 
-                    var emo_traces = [];
-                    var timestamps = raw_emotions.map(function(emo) {return emo.timestamp;});
+                var emo_traces = [];
+                var timestamps = raw_emotions.map(function(emo) {return emo.timestamp;});
 
-                    // Create a trace (line) for each emotion
-                    var first_raw_emotion = raw_emotions[0];
-                    for (var property in first_raw_emotion) {
-                        if (first_raw_emotion.hasOwnProperty(property)) {
-                            if (['joy','sadness', 'disgust', 'contempt', 'anger',
-                                    'fear', 'surprise', 'valence', 'engagement'].includes(property)) {
+                // Create a trace (line) for each emotion
+                var first_raw_emotion = raw_emotions[0];
+                for (var property in first_raw_emotion) {
+                    if (first_raw_emotion.hasOwnProperty(property)) {
+                        if (['joy','sadness', 'disgust', 'contempt', 'anger',
+                                'fear', 'surprise', 'valence', 'engagement'].includes(property)) {
 
-                                var emo_scores = raw_emotions.map(function(emo) {return Math.floor(emo[property]);});
-                                var emo_trace = {
-                                    x: timestamps,
-                                    y: emo_scores,
-                                    name: emotion_emojis[property] + " " + property,
-                                    line: {
-                                        color: emotion_colors[property]
-                                    }
-                                };
-                                emo_traces.push(emo_trace)
-                            }
+                            var emo_scores = raw_emotions.map(function(emo) {return Math.floor(emo[property]);});
+                            var emo_trace = {
+                                x: timestamps,
+                                y: emo_scores,
+                                name: emotion_emojis[property] + " " + property,
+                                line: {
+                                    color: emotion_colors[property]
+                                }
+                            };
+                            emo_traces.push(emo_trace)
                         }
                     }
-
-                    var layout = {
-                        xaxis: {
-                            title: 'Time (sec)'
-                        },
-                        yaxis: {
-                            title: 'Score'
-                        },
-                        margin: {t: 0}
-                    };
-
-                    // Redraws entire graph
-                    Plotly.newPlot('emotrace-plots', emo_traces, layout);
                 }
+
+                var layout = {
+                    xaxis: {
+                        title: 'Time (sec)'
+                    },
+                    yaxis: {
+                        title: 'Score'
+                    },
+                    margin: {t: 0}
+                };
+
+                // Redraws entire graph
+                Plotly.newPlot('emotrace-plots', emo_traces, layout);
             },
             error: function(error) {
                 console.log(error);
