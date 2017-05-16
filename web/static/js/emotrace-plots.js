@@ -14,9 +14,21 @@ var emotion_colors = {
     fear: "rgb(148, 103, 189)",     //purple
     surprise: "rgb(255, 127, 14)",  //orange
     valence: "rgb(127, 127, 127)",  //gray
-    engagement: "rgb(188, 189, 34)" //gold
+    engagement: "rgb(246, 228, 181)" //tan
     //rgb(227, 119, 194) //pink
-}
+};
+
+var emotion_emojis = {
+    joy: "😃",
+    sadness: "😢",
+    disgust: "🤢",
+    contempt: "😏",
+    anger: "😡",
+    fear: "😱",
+    surprise: "😲",
+    valence: "🎭",
+    engagement: "💡"
+};
 
 
 $(document).ready(function() {
@@ -55,7 +67,7 @@ $(document).ready(function() {
                                 var emo_trace = {
                                     x: timestamps,
                                     y: emo_scores,
-                                    name: property,
+                                    name: emotion_emojis[property] + " " + property,
                                     line: {
                                         color: emotion_colors[property]
                                     }
