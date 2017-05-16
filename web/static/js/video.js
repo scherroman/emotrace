@@ -153,27 +153,28 @@ function onWebcamConnectSuccess(event) {
 
 // function that makes ajax call to server and resets data aggregation every <aggregate_ms>
 function interval(){
-    for(var emotion in aggregate){
-        if(times_collected != 0)
-            aggregate[emotion] = aggregate[emotion]/times_collected;
+    if(times_collected != 0) {
+        for (var emotion in aggregate) {
+            aggregate[emotion] = aggregate[emotion] / times_collected;
+        }
+        times_collected = 0;
+        if (player === null)
+            return;
+        aggregate['timestamp'] = Math.floor(player.getCurrentTime());
+        // console.log(JSON.stringify(aggregate));
+        data_arr.push(aggregate);
+        aggregate = {
+            joy: 0,
+            sadness: 0,
+            disgust: 0,
+            contempt: 0,
+            anger: 0,
+            fear: 0,
+            surprise: 0,
+            valence: 0,
+            engagement: 0
+        };
     }
-    times_collected = 0;
-    if(player === null)
-        return;
-    aggregate['timestamp'] = Math.floor(player.getCurrentTime());
-    // console.log(JSON.stringify(aggregate));
-    data_arr.push(aggregate);
-    aggregate = {
-        joy:0,
-        sadness:0,
-        disgust:0,
-        contempt:0,
-        anger:0,
-        fear:0,
-        surprise:0,
-        valence:0,
-        engagement:0
-    };
 }
 
 // ajax call to send data to server every <server_ms>
@@ -248,17 +249,5 @@ function onStart() {
     console.log("Started camera");
 }
 
-// function onImageResultsSuccess(faces, image, timestamp) {
-//     //aggregate data
-//     aggregate['joy'] += faces[0].emotions.joy;
-//     aggregate['sadness'] += faces[0].emotions.sadness;
-//     aggregate['disgust'] += faces[0].emotions.disgust;
-//     aggregate['contempt'] += faces[0].emotions.contempt;
-//     aggregate['anger'] += faces[0].emotions.anger;
-//     aggregate['fear'] += faces[0].emotions.fear;
-//     aggregate['surprise'] += faces[0].emotions.surprise;
-//     aggregate['valence'] += faces[0].emotions.valence;
-//     aggregate['engagement'] += faces[0].emotions.engagement;
-// }
 
 
