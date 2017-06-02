@@ -1,7 +1,7 @@
 # emotrace
 A Java Spring web app providing emotion analytics for online video content
 
-Check it out at [emotrace-x1.appspot.com](emotrace-x1.appspot.com)
+Check it out at [emotrace-x1.appspot.com](https://emotrace-x1.appspot.com)
 
 ## Setup
 
