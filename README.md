@@ -45,19 +45,19 @@ Check it out at [emotrace-x1.appspot.com](https://emotrace-x1.appspot.com)
 
 ## Dev Guide
 
-**1. Pull/Sync master for latest code**
+1. **Pull/Sync master for latest code**
 
-**2. Create new feature branch from master**
+2. **Create new feature branch from master**
 
-**3. Code out the feature on the new feature branch, test locally**
+3. **Code out the feature on the new feature branch, test locally**
 
-**4. When finished, pull/sync master again**
+4. **When finished, pull/sync master again**
 
-**5. Update feature branch from master, resolve conflicts**
+5. **Update feature branch from master, resolve conflicts**
 
-**5. Merge feature branch into master locally**
+5. **Merge feature branch into master locally**
 
-**6. Push/Sync master**
+6. **Push/Sync master**
 
 ## Helpful gcloud commands
 
